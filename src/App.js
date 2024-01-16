@@ -10,7 +10,7 @@ function Dropdown({label, options, onChange, value}) {
     <div>
       <label>{label}: </label>
       <select onChange={(e) => onChange(e.target.value)} value={value}>
-        {/* {!value && <option value="" disabled>Select </option>} */}
+        {!value && <option value="" disabled>Select </option>}
         {options.map((option, index) => (
           <option key={index} value={option.value}>
             {option.label}
@@ -22,8 +22,8 @@ function Dropdown({label, options, onChange, value}) {
 }
 
 export default function HelmetFinder() {
-  const [circumference, setCircumference] = useState(48);
-  const [headShape, setHeadShape] = useState(1.2);
+  const [circumference, setCircumference] = useState('');
+  const [headShape, setHeadShape] = useState('');
   const [bestHelmets, setBestHelmets] = useState([]);
 
   useEffect(() => {
@@ -56,24 +56,26 @@ export default function HelmetFinder() {
 
   function findBestHelmets() {
     // For each helmet in helmetData... 
-    let scoredHelmets = helmetData.map(helmet => {
-      let {fitScore, userWidGap, userLenGap} = calculateFit(helmet, circumference, headShape);
-      console.log(helmet['Helmet Name'] + " circumference: " + circumference)
-      console.log(helmet['Helmet Name'] + " headShape: " + headShape)
-      console.log(helmet['Helmet Name'] + " lenGap: " + userLenGap)
-      console.log(helmet['Helmet Name'] + " widGap: " + userWidGap)  
-      return {
-        ...helmet, // All the helmet data + new properties
-        fitScore,
-        userWidGap,
-        userLenGap
-      };
-    });
+    if(circumference && headShape) {
+      let scoredHelmets = helmetData.map(helmet => {
+        let {fitScore, userWidGap, userLenGap} = calculateFit(helmet, circumference, headShape);
+        console.log(helmet['Helmet Name'] + " circumference: " + circumference)
+        console.log(helmet['Helmet Name'] + " headShape: " + headShape)
+        console.log(helmet['Helmet Name'] + " lenGap: " + userLenGap)
+        console.log(helmet['Helmet Name'] + " widGap: " + userWidGap)  
+        return {
+          ...helmet, // All the helmet data + new properties
+          fitScore,
+          userWidGap,
+          userLenGap
+        };
+      });
 
-    // If the comparator function returns a negative, a comes before b
-    scoredHelmets.sort((a, b) => a.fitScore - b.fitScore);
-    setBestHelmets(scoredHelmets.slice(0, 6));
-  };
+      // If the comparator function returns a negative, a comes before b
+      scoredHelmets.sort((a, b) => a.fitScore - b.fitScore);
+      setBestHelmets(scoredHelmets.slice(0, 6));
+    };
+  }
 
   // Update and find helmets when user changes input
   function handleCircumferenceChange(value) {
