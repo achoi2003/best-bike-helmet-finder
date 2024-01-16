@@ -1,12 +1,12 @@
-.board-row {
-    /* Styling for the row */
-  }
+.helmet-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.helmet-info {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
   
-  .square {
-    width: 60px;       /* Width of the square */
-    height: 60px;      /* Height of the square */
-    border: 1px solid black; /* Border of the square */
-    border-radius: 0;  /* Removes rounded corners */
-    font-size: 24px;   /* Font size inside the square */
-    /* Add any other styling you need */
-  }

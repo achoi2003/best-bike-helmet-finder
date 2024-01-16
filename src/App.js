@@ -2,17 +2,18 @@
 // default: it is the main function in this file
 // className: for css styling
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import helmetData from './helmets-data.json'
 
-function Dropdown({ label, options, onChange }) {
+function Dropdown({label, options, onChange, value}) {
   return (
     <div>
       <label>{label}: </label>
-      <select onChange={(e) => onChange(e.target.value)}>
+      <select onChange={(e) => onChange(e.target.value)} value={value}>
+        {/* {!value && <option value="" disabled>Select </option>} */}
         {options.map((option, index) => (
-          <option key={index} value={option}>
-            {option}
+          <option key={index} value={option.value}>
+            {option.label}
           </option>
         ))}
       </select>
@@ -25,56 +26,98 @@ export default function HelmetFinder() {
   const [headShape, setHeadShape] = useState(1.2);
   const [bestHelmets, setBestHelmets] = useState([]);
 
-  const calculateFit = (helmet, userCircumference, userHeadShape) => {
+  useEffect(() => {
+    findBestHelmets();
+  }, [circumference, headShape])
+
+  function calculateFit(helmet, userCircumference, userHeadShape) {
     let widthCalc = Math.sqrt((2 * Math.pow(userCircumference / 6.28, 2)) / (1 + Math.pow(userHeadShape, 2))) * 2;
     let lengthCalc = widthCalc * userHeadShape;
 
-    let userLenGap = helmet['Length interior'] - lengthCalc;
-    let userWidGap = helmet['Width interior'] - widthCalc;
+    let userWidGap = Number(helmet['Width Interior']) - widthCalc;
+    let userLenGap = Number(helmet['Length Interior']) - lengthCalc;
 
-    return userLenGap < 0 || userWidGap < 0 ? 999 : Math.sqrt(Math.pow(userWidGap, 2) + Math.pow(userLenGap, 2));
+    // console.log("Length Interior: " + helmet['Length Interior'])
+    // console.log("Width Interior: " + helmet['Width Interior'])
+    // console.log(helmet['Helmet Name'] + " userCircumference: " + userCircumference)
+    // console.log(helmet['Helmet Name'] + " userHeadShape: " + userHeadShape)
+    // console.log(helmet['Helmet Name'] + " userLenGap: " + userLenGap)
+    // console.log(helmet['Helmet Name'] + " userWidGap: " + userWidGap)
+
+    // Helmets that don't fit are assigned a high unfit score of 999
+    let fitScore = (userLenGap < 0 || userWidGap < 0) ? 999 : Math.sqrt(Math.pow(userWidGap, 2) + Math.pow(userLenGap, 2));
+
+    return {
+      fitScore,
+      userWidGap,
+      userLenGap
+    }
   };
 
-  const findBestHelmets = () => {
-    let scoredHelmets = helmetData.map(helmet => ({
-      ...helmet,
-      fitCalc: calculateFit(helmet, circumference, headShape)
-    }));
+  function findBestHelmets() {
+    // For each helmet in helmetData... 
+    let scoredHelmets = helmetData.map(helmet => {
+      let {fitScore, userWidGap, userLenGap} = calculateFit(helmet, circumference, headShape);
+      console.log(helmet['Helmet Name'] + " circumference: " + circumference)
+      console.log(helmet['Helmet Name'] + " headShape: " + headShape)
+      console.log(helmet['Helmet Name'] + " lenGap: " + userLenGap)
+      console.log(helmet['Helmet Name'] + " widGap: " + userWidGap)  
+      return {
+        ...helmet, // All the helmet data + new properties
+        fitScore,
+        userWidGap,
+        userLenGap
+      };
+    });
 
-    scoredHelmets.sort((a, b) => a.fitCalc - b.fitCalc);
-    setBestHelmets(scoredHelmets.slice(0, 3));
+    // If the comparator function returns a negative, a comes before b
+    scoredHelmets.sort((a, b) => a.fitScore - b.fitScore);
+    setBestHelmets(scoredHelmets.slice(0, 6));
   };
 
   // Update and find helmets when user changes input
-  const handleCircumferenceChange = (value) => {
+  function handleCircumferenceChange(value) {
     setCircumference(Number(value));
-    findBestHelmets();
   };
 
-  const handleHeadShapeChange = (value) => {
+  function handleHeadShapeChange(value) {
     setHeadShape(Number(value));
-    findBestHelmets();
   };
 
   return (
     <div>
       <Dropdown
         label="Head Circumference"
-        options={Array.from({ length: 21 }, (_, i) => 48 + i)}
-        onChange={handleCircumferenceChange}
+        options={Array.from({length: 21}, (_, i) => ({label: 48 + i, value: 480 + i * 10 }))}
+        onChange={(value) => handleCircumferenceChange(value)}
+        value={circumference}
       />
       <Dropdown
         label="Head Shape"
-        options={Array.from({ length: 5 }, (_, i) => 1 + i)}
-        onChange={handleHeadShapeChange}
+        options={[
+          {label: 'Very Round', value: 1.2},
+          {label: 'Round', value: 1.225},
+          {label: 'Intermediate', value: 1.25},
+          {label: 'Oval', value: 1.275},
+          {label: 'Aero', value: 1.3}
+        ]}
+        onChange={(value) => handleHeadShapeChange(value)}
+        value={headShape}
       />
       <div>
         <h2>Top 3 Helmets</h2>
-        {bestHelmets.map((helmet, index) => (
-          <div key={index}>
-            <p>{helmet.Helmet}</p>
-          </div>
-        ))}
+        <div className="helmet-container">
+          {bestHelmets.map((helmet, index) => (
+            <div key={index} className="helmet-info">
+              <h3>{helmet['Helmet Name']}</h3>
+              <p>VTech Rating: {helmet['VTech Rating']}</p>
+              <p>Price: {helmet['Retail Price']}</p>
+              <p>Width Gap: {helmet.userWidGap}</p>
+              <p>Length Gap: {helmet.userLenGap}</p>
+              <p>Fit Score: {helmet.fitScore}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
