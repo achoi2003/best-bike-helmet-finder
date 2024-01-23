@@ -1,25 +1,25 @@
-// export: makes the function accessible outside of this file
-// default: it is the main function in this file
-// className: for css styling
-
 import { useState, useEffect, useCallback } from 'react';
-import helmetData from './helmets-data.json'
+import helmetData from './helmets-data.json';
 
-function Dropdown({label, options, onChange, value}) {
-  return (
-    <div>
-      <label>{label}: </label>
-      <select onChange={(e) => onChange(e.target.value)} value={value}>
-        {!value && <option value="" disabled>Select </option>}
-        {options.map((option, index) => (
-          <option key={index} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-}
+import veryRoundImg from './assets/very_round_head.png';
+import roundImg from './assets/round_head.png';
+import intermediateImg from './assets/intermediate_head.png';
+import ovalImg from './assets/oval_head.png';
+import aeroImg from './assets/aero_head.png';
+
+// function Dropdown({ label, options, onChange, value }) {
+//   return (
+//     <div className="mb-4">
+//       <label htmlFor={label} className="block text-sm font-medium text-gray-700">{label}</label>
+//       <select id={label} className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" onChange={(e) => onChange(e.target.value)} value={value}>
+//         {!value && <option value="" disabled>Select</option>}
+//         {options.map((option, index) => (
+//           <option key={index} value={option.value}>{option.label}</option>
+//         ))}
+//       </select>
+//     </div>
+//   );
+// }
 
 export default function HelmetFinder() {
   const [circumference, setCircumference] = useState('');
@@ -45,7 +45,7 @@ export default function HelmetFinder() {
 
       // If the comparator function returns a negative, a comes before b
       scoredHelmets.sort((a, b) => a.fitScore - b.fitScore);
-      setBestHelmets(scoredHelmets.slice(0, 6));
+      setBestHelmets(scoredHelmets.slice(0, 3));
     };
   }, [circumference, headShape])
 
@@ -88,9 +88,9 @@ export default function HelmetFinder() {
 
   return (
     <div className='container mx-auto p-4'>
-      <div className="mb-4">
+      <div className="mb-6">
         <label htmlFor="circumference-range" className="block text-sm font-medium text-gray-700">
-          Head Circumference (cm)
+          Step 1: Head Circumference (cm)
         </label>
         <input
           type="range"
@@ -99,19 +99,31 @@ export default function HelmetFinder() {
           min="48"
           max="68"
           step="1"
-          value={circumference / 10} // Dividing by 10 to adjust for slider
+          value={circumference / 10}
           onChange={handleCircumferenceChange}
           className="mt-1 w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
         />
-        <div className="text-center">{circumference ? circumference / 10 : 'Select Circumference'}</div>
+        <div className="text-center mt-2">{circumference ? circumference / 10 : 'Adjust the slider to match your head circumference'}</div>
+      </div>
+      <div className="mb-6">
+        <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">
+          Step 2: Head Shape
+        </h3>
+        <div className="mt-2 flex justify-around">
+          <div>
+            <img src={veryRoundImg} alt="Very Round" onClick={() => handleHeadShapeChange(1.2)} className="cursor-pointer w-1/6 sm:w-1/12 md:w-1/12 lg:w-1/12 xl:w-1/12 object-cover"/>
+            <p className="text-xs mt-2">Very Round</p> 
+          </div>
+          <div>
+            <img src={roundImg} alt="Round" onClick={() => handleHeadShapeChange(1.225)} className="cursor-pointer w-1/6 sm:w-1/12 md:w-1/12 lg:w-1/12 xl:w-1/12 object-cover"/>
+            <p className="text-xs mt-2">Round</p> 
+          </div>
+          <img src={intermediateImg} alt="Intermediate" onClick={() => handleHeadShapeChange(1.25)} className="cursor-pointer w-1/6 sm:w-1/12 md:w-1/12 lg:w-1/12 xl:w-1/12 object-cover"/>
+          <img src={ovalImg} alt="Oval" onClick={() => handleHeadShapeChange(1.275)} className="cursor-pointer w-1/6 sm:w-1/12 md:w-1/12 lg:w-1/12 xl:w-1/12 object-cover"/>
+          <img src={aeroImg} alt="Aero" onClick={() => handleHeadShapeChange(1.3)} className="cursor-pointer w-1/6 sm:w-1/12 md:w-1/12 lg:w-1/12 xl:w-1/12 object-cover"/>
+        </div>
       </div>
       {/* <Dropdown
-        label="Head Circumference"
-        options={Array.from({length: 21}, (_, i) => ({label: 48 + i, value: 480 + i * 10 }))}
-        onChange={(value) => handleCircumferenceChange(value)}
-        value={circumference}
-      /> */}
-      <Dropdown
         label="Head Shape"
         options={[
           {label: 'Very Round', value: 1.2},
@@ -122,19 +134,18 @@ export default function HelmetFinder() {
         ]}
         onChange={(value) => handleHeadShapeChange(value)}
         value={headShape}
-      />
+      /> */}
       <div>
-        <h2>Top Helmets</h2>
-        <div className="helmet-container">
+        <h2 className="text-2xl font-bold mb-4">Top Helmets</h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {bestHelmets.map((helmet, index) => (
-            <div key={index} className="helmet-info">
-              <h3>{helmet['Helmet Name']}</h3>
-              {/* <img src={helmet.imageUrl} alt={helmet['Helmet Name']} /> */}
-              <p>VTech Rating: {helmet['VTech Rating']}</p>
-              <p>Price: {helmet['Retail Price']}</p>
-              <p>Width Gap: {helmet.userWidGap}</p>
-              <p>Length Gap: {helmet.userLenGap}</p>
-              <p>Fit Score: {helmet.fitScore}</p>
+            <div key={index} className="helmet-info p-4 border border-gray-200 rounded-lg">
+              <h3 className="font-semibold text-lg mb-2">{helmet['Helmet Name']}</h3>
+              <p className="text-sm text-gray-600">VTech Rating: {helmet['VTech Rating']}</p>
+              <p className="text-sm text-gray-600">Price: ${helmet['Retail Price']}</p>
+              <p className="text-sm text-gray-600">Width Gap: {helmet.userWidGap.toFixed(2)}</p>
+              <p className="text-sm text-gray-600">Length Gap: {helmet.userLenGap.toFixed(2)}</p>
+              <p className="text-sm text-gray-600">Fit Score: {helmet.fitScore.toFixed(2)}</p>
             </div>
           ))}
         </div>
