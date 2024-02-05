@@ -12,7 +12,8 @@
     "Purchase URL": "https://www.trekbikes.com/us/en_US/equipment/bike-accessories/bike-helmets/mountain-bike-helmets/bontrager-starvos-wavecel-cycling-helmet/p/31567/?colorCode=white",
     "Size": "Large",
     "Retail Price": "105",
-    "Thickness": "28"
+    "Thickness": "28",
+    "Image": "BontragerStarvosWaveCel.png"
   },
   {
     "ID": "2",
@@ -27,7 +28,8 @@
     "Purchase URL": "https://www.trekbikes.com/us/en_US/equipment/bike-accessories/bike-helmets/mountain-bike-helmets/bontrager-starvos-wavecel-cycling-helmet/p/31567/?colorCode=white",
     "Size": "Medium",
     "Retail Price": "105",
-    "Thickness": "28"
+    "Thickness": "28",
+    "Image": "BontragerStarvosWaveCel.png"
   },
   {
     "ID": "3",
@@ -42,7 +44,8 @@
     "Purchase URL": "https://www.trekbikes.com/us/en_US/equipment/bike-accessories/bike-helmets/mountain-bike-helmets/bontrager-starvos-wavecel-cycling-helmet/p/31567/?colorCode=white",
     "Size": "Small",
     "Retail Price": "105",
-    "Thickness": "28"
+    "Thickness": "28",
+    "Image": "BontragerStarvosWaveCel.png"
   },
   {
     "ID": "4",
@@ -57,7 +60,8 @@
     "Purchase URL": "https://www.trekbikes.com/us/en_US/equipment/bike-accessories/bike-helmets/mountain-bike-helmets/bontrager-starvos-wavecel-cycling-helmet/p/31567/?colorCode=white",
     "Size": "XLarge",
     "Retail Price": "105",
-    "Thickness": "28"
+    "Thickness": "28",
+    "Image": "BontragerStarvosWaveCel.png"
   },
   {
     "ID": "5",
@@ -72,7 +76,8 @@
     "Purchase URL": "https://www.trekbikes.com/us/en_US/equipment/bike-accessories/bike-helmets/mountain-bike-helmets/bontrager-starvos-wavecel-cycling-helmet/p/31567/?colorCode=white",
     "Size": "XSmall",
     "Retail Price": "105",
-    "Thickness": "28"
+    "Thickness": "28",
+    "Image": "BontragerStarvosWaveCel.png"
   },
   {
     "ID": "6",
@@ -88,7 +93,8 @@
     "Purchase URL": "https://www.amazon.com/Giro-Eclipse-Spherical-Cycling-Helmet/dp/B09KKV8FP8/ref=sr_1_1_sspa?crid=262ZJ1YGU0LT&keywords=giro%2Beclipse&qid=1669143713&sprefix=giro%2Beclipse%2Caps%2C228&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&smid=A2KUKHS52EIZXC&th=1&psc=1",
     "Size": "Small",
     "Retail Price": "200",
-    "Thickness": "30"
+    "Thickness": "30",
+    "Image": "Bontrager-XXX-Bike-Helmet.jpg"
   },
   {
     "ID": "7",
@@ -104,7 +110,8 @@
     "Purchase URL": "https://www.amazon.com/Giro-Eclipse-Spherical-Cycling-Helmet/dp/B09KKV8FP8/ref=sr_1_1_sspa?crid=262ZJ1YGU0LT&keywords=giro%2Beclipse&qid=1669143713&sprefix=giro%2Beclipse%2Caps%2C228&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&smid=A2KUKHS52EIZXC&th=1&psc=1",
     "Size": "Medium",
     "Retail Price": "250",
-    "Thickness": "30"
+    "Thickness": "30",
+    "Image": "Giro-Eclipse-Road-Bike-Helmet.jpg"
   },
   {
     "ID": "8",
@@ -120,7 +127,8 @@
     "Purchase URL": "https://www.amazon.com/Giro-Eclipse-Spherical-Cycling-Helmet/dp/B09KKV8FP8/ref=sr_1_1_sspa?crid=262ZJ1YGU0LT&keywords=giro%2Beclipse&qid=1669143713&sprefix=giro%2Beclipse%2Caps%2C228&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&smid=A2KUKHS52EIZXC&th=1&psc=1",
     "Size": "Large",
     "Retail Price": "200",
-    "Thickness": "30"
+    "Thickness": "30",
+    "Image": "Giro-Synthe-Mips-II-Bike-Helmet.jpg"
   },
   {
     "ID": "9",
@@ -135,7 +143,8 @@
     "Purchase URL": "https://www.amazon.com/Kask-Mojito-Cubed-Bicycle-Helmet/dp/B08XN2WJ5G/ref=sr_1_2?crid=1QSYLOPN9UES&keywords=kask%2Bmojito&qid=1678920101&sprefix=kask%2Bmojito%2Caps%2C180&sr=8-2&th=1",
     "Size": "Large",
     "Retail Price": "170",
-    "Thickness": "21"
+    "Thickness": "21",
+    "Image": "KaskMojito.jpeg"
   },
   {
     "ID": "10",
@@ -150,7 +159,8 @@
     "Purchase URL": "https://www.amazon.com/Kask-Mojito-Cubed-Bicycle-Helmet/dp/B08XN2WJ5G/ref=sr_1_2?crid=1QSYLOPN9UES&keywords=kask%2Bmojito&qid=1678920101&sprefix=kask%2Bmojito%2Caps%2C180&sr=8-2&th=1",
     "Size": "Medium",
     "Retail Price": "170",
-    "Thickness": "21"
+    "Thickness": "21",
+    "Image": "KaskMojito.jpeg"
   },
   {
     "ID": "11",
@@ -165,7 +175,8 @@
     "Purchase URL": "https://www.amazon.com/Kask-Mojito-Cubed-Bicycle-Helmet/dp/B08XN2WJ5G/ref=sr_1_2?crid=1QSYLOPN9UES&keywords=kask%2Bmojito&qid=1678920101&sprefix=kask%2Bmojito%2Caps%2C180&sr=8-2&th=1",
     "Size": "Small",
     "Retail Price": "170",
-    "Thickness": "21"
+    "Thickness": "21",
+    "Image": "KaskMojito.jpeg"
   },
   {
     "ID": "12",
@@ -181,7 +192,8 @@
     "Purchase URL": "https://www.amazon.com/Giro-Eclipse-Spherical-Cycling-Helmet/dp/B09KKV8FP8/ref=sr_1_1_sspa?crid=262ZJ1YGU0LT&keywords=giro%2Beclipse&qid=1669143713&sprefix=giro%2Beclipse%2Caps%2C228&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&smid=A2KUKHS52EIZXC&th=1&psc=1",
     "Size": "Medium",
     "Retail Price": "300",
-    "Thickness": "30"
+    "Thickness": "30",
+    "Image": "Kask-Protone-Aero-Bike-Helmet.jpg"
   },
   {
     "ID": "13",
@@ -197,7 +209,8 @@
     "Purchase URL": "https://www.amazon.com/Giro-Eclipse-Spherical-Cycling-Helmet/dp/B09KKV8FP8/ref=sr_1_1_sspa?crid=262ZJ1YGU0LT&keywords=giro%2Beclipse&qid=1669143713&sprefix=giro%2Beclipse%2Caps%2C228&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&smid=A2KUKHS52EIZXC&th=1&psc=1",
     "Size": "Large",
     "Retail Price": "300",
-    "Thickness": "30"
+    "Thickness": "30",
+    "Image": "Kask-Protone-Icon-Aero-Bike-Helmet.jpg"
   },
   {
     "ID": "14",
@@ -213,7 +226,8 @@
     "Purchase URL": "https://www.amazon.com/Kask-Protone-Helmet-Medium-White/dp/B0B3S6W52V/ref=sr_1_1?crid=1L52LH57WUVIB&keywords=kask%2Bprotone%2Bicon&qid=1678917772&sprefix=kask%2Bprotone%2Bic%2Caps%2C177&sr=8-1&th=1",
     "Size": "Large",
     "Retail Price": "300",
-    "Thickness": "23"
+    "Thickness": "23",
+    "Image": "Kask-Protone-Icon-Aero-Bike-Helmet.jpg"
   },
   {
     "ID": "15",
@@ -229,7 +243,8 @@
     "Purchase URL": "https://www.amazon.com/Kask-Protone-Helmet-Medium-White/dp/B0B3S6W52V/ref=sr_1_1?crid=1L52LH57WUVIB&keywords=kask%2Bprotone%2Bicon&qid=1678917772&sprefix=kask%2Bprotone%2Bic%2Caps%2C177&sr=8-1&th=1",
     "Size": "Medium",
     "Retail Price": "300",
-    "Thickness": "23"
+    "Thickness": "23",
+    "Image": "Kask-Protone-Icon-Aero-Bike-Helmet.jpg"
   },
   {
     "ID": "16",
@@ -245,7 +260,8 @@
     "Purchase URL": "https://www.amazon.com/Kask-Protone-Helmet-Medium-White/dp/B0B3S6W52V/ref=sr_1_1?crid=1L52LH57WUVIB&keywords=kask%2Bprotone%2Bicon&qid=1678917772&sprefix=kask%2Bprotone%2Bic%2Caps%2C177&sr=8-1&th=1",
     "Size": "Small",
     "Retail Price": "300",
-    "Thickness": "23"
+    "Thickness": "23",
+    "Image": "Kask-Protone-Icon-Aero-Bike-Helmet.jpg"
   },
   {
     "ID": "17",
@@ -261,7 +277,8 @@
     "Purchase URL": "https://www.amazon.com/Giro-Eclipse-Spherical-Cycling-Helmet/dp/B09KKV8FP8/ref=sr_1_1_sspa?crid=262ZJ1YGU0LT&keywords=giro%2Beclipse&qid=1669143713&sprefix=giro%2Beclipse%2Caps%2C228&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&smid=A2KUKHS52EIZXC&th=1&psc=1",
     "Size": "Large",
     "Retail Price": "250",
-    "Thickness": "30"
+    "Thickness": "30",
+    "Image": "Kask-Valegro-Road-Bike-Helmet.jpg"
   },
   {
     "ID": "18",
@@ -277,7 +294,8 @@
     "Purchase URL": "https://www.amazon.com/Valegro-Cycling-Cyclocross-Maximum-Ventilation/dp/B08XN1GRZD/ref=sr_1_2?crid=8K64KEMWX567&keywords=kask+valegro&qid=1678918234&sprefix=kask+valegro%2Caps%2C235&sr=8-2",
     "Size": "Large",
     "Retail Price": "250",
-    "Thickness": "27"
+    "Thickness": "27",
+    "Image": "Kask-Valegro-Road-Bike-Helmet.jpg"
   },
   {
     "ID": "19",
@@ -293,7 +311,8 @@
     "Purchase URL": "https://www.amazon.com/Valegro-Cycling-Cyclocross-Maximum-Ventilation/dp/B08XN1GRZD/ref=sr_1_2?crid=8K64KEMWX567&keywords=kask+valegro&qid=1678918234&sprefix=kask+valegro%2Caps%2C235&sr=8-2",
     "Size": "Medium",
     "Retail Price": "250",
-    "Thickness": "27"
+    "Thickness": "27",
+    "Image": "Kask-Valegro-Road-Bike-Helmet.jpg"
   },
   {
     "ID": "20",
@@ -309,7 +328,8 @@
     "Purchase URL": "https://www.amazon.com/Valegro-Cycling-Cyclocross-Maximum-Ventilation/dp/B08XN1GRZD/ref=sr_1_2?crid=8K64KEMWX567&keywords=kask+valegro&qid=1678918234&sprefix=kask+valegro%2Caps%2C235&sr=8-2",
     "Size": "Small",
     "Retail Price": "250",
-    "Thickness": "27"
+    "Thickness": "27",
+    "Image": "Kask-Valegro-Road-Bike-Helmet.jpg"
   },
   {
     "ID": "21",
@@ -325,7 +345,8 @@
     "Purchase URL": "https://www.amazon.com/Giro-Eclipse-Spherical-Cycling-Helmet/dp/B09KKV8FP8/ref=sr_1_1_sspa?crid=262ZJ1YGU0LT&keywords=giro%2Beclipse&qid=1669143713&sprefix=giro%2Beclipse%2Caps%2C228&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&smid=A2KUKHS52EIZXC&th=1&psc=1",
     "Size": "Small",
     "Retail Price": "260",
-    "Thickness": "30"
+    "Thickness": "30",
+    "Image": "POC-Ventral-MIPS-Bike-Helmet.jpg"
   },
   {
     "ID": "22",
@@ -341,7 +362,8 @@
     "Purchase URL": "https://www.amazon.com/Giro-Eclipse-Spherical-Cycling-Helmet/dp/B09KKV8FP8/ref=sr_1_1_sspa?crid=262ZJ1YGU0LT&keywords=giro%2Beclipse&qid=1669143713&sprefix=giro%2Beclipse%2Caps%2C228&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&smid=A2KUKHS52EIZXC&th=1&psc=1",
     "Size": "Small",
     "Retail Price": "300",
-    "Thickness": "30"
+    "Thickness": "30",
+    "Image": "Specialized-S-Works-Evade-3-Aero-Helmet.jpg"
   },
   {
     "ID": "23",
@@ -357,7 +379,8 @@
     "Purchase URL": "https://www.specialized.com/us/en/s-works-evade-3/p/220799?color=361541-220799",
     "Size": "Large",
     "Retail Price": "300",
-    "Thickness": "23"
+    "Thickness": "23",
+    "Image": "Specialized-S-Works-Evade-3-Aero-Helmet.jpg"
   },
   {
     "ID": "24",
@@ -373,7 +396,8 @@
     "Purchase URL": "https://www.specialized.com/us/en/s-works-evade-3/p/220799?color=361541-220799",
     "Size": "Medium",
     "Retail Price": "300",
-    "Thickness": "23"
+    "Thickness": "23",
+    "Image": "Specialized-S-Works-Evade-3-Aero-Helmet.jpg"
   },
   {
     "ID": "25",
@@ -389,7 +413,8 @@
     "Purchase URL": "https://www.specialized.com/us/en/s-works-evade-3/p/220799?color=361541-220799",
     "Size": "Small",
     "Retail Price": "300",
-    "Thickness": "23"
+    "Thickness": "23",
+    "Image": "Specialized-S-Works-Evade-3-Aero-Helmet.jpg"
   },
   {
     "ID": "26",
@@ -405,7 +430,8 @@
     "Purchase URL": "https://www.specialized.com/us/en/s-works-prevail-3/p/220798?color=361544-220798",
     "Size": "Large",
     "Retail Price": "300",
-    "Thickness": "24"
+    "Thickness": "24",
+    "Image": "Specialized-Prevail-III-Road-Bike-Helmet.jpg"
   },
   {
     "ID": "27",
@@ -421,7 +447,8 @@
     "Purchase URL": "https://www.specialized.com/us/en/s-works-prevail-3/p/220798?color=361544-220798",
     "Size": "Medium",
     "Retail Price": "300",
-    "Thickness": "24"
+    "Thickness": "24",
+    "Image": "Specialized-Prevail-III-Road-Bike-Helmet.jpg"
   },
   {
     "ID": "28",
@@ -437,11 +464,12 @@
     "Purchase URL": "https://www.specialized.com/us/en/s-works-prevail-3/p/220798?color=361544-220798",
     "Size": "Small",
     "Retail Price": "300",
-    "Thickness": "24"
+    "Thickness": "24",
+    "Image": "Specialized-Prevail-III-Road-Bike-Helmet.jpg"
   },
   {
     "ID": "29",
-    "Helmet Name": "Specialized Prevail3 ",
+    "Helmet Name": "Specialized Prevail 3 ",
     "VTech Rating": "5 Stars",
     "Circumference Min": "55",
     "Circumference Max": "59",
@@ -453,7 +481,8 @@
     "Purchase URL": "https://www.amazon.com/Giro-Eclipse-Spherical-Cycling-Helmet/dp/B09KKV8FP8/ref=sr_1_1_sspa?crid=262ZJ1YGU0LT&keywords=giro%2Beclipse&qid=1669143713&sprefix=giro%2Beclipse%2Caps%2C228&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&smid=A2KUKHS52EIZXC&th=1&psc=1",
     "Size": "Medium",
     "Retail Price": "300",
-    "Thickness": "30"
+    "Thickness": "30",
+    "Image": "Specialized-Prevail-III-Road-Bike-Helmet.jpg"
   },
   {
     "ID": "30",
@@ -469,6 +498,7 @@
     "Purchase URL": "https://www.kavsports.com",
     "Size": "Custom Fit",
     "Retail Price": "320",
-    "Thickness": "30"
+    "Thickness": "30",
+    "Image": ""
   }
 ]

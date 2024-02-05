@@ -13,4 +13,8 @@
   border: 1px solid #ddd;
   border-radius: 8px;
 }
+
+.ellipse-hover:hover {
+  background-color: rgba(173, 216, 230, 1); /* Full opacity on hover */
+}
   
