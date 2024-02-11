@@ -535,11 +535,6 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.helmet-container {
-  display: flex;
-  justify-content: space-around;
-}
-
 .helmet-info {
   margin: 10px;
   padding: 10px;
