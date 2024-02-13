@@ -7,15 +7,9 @@ import intermediateImg from "./assets/head-shape/intermediate-head.png";
 import ovalImg from "./assets/head-shape/oval-head.png";
 import aeroImg from "./assets/head-shape/aero-head.png";
 import headModelImg from "./assets/head-model.jpeg";
-import helmetBotImg from "./assets/helmet-bottom.png";
 import topDownImg from "./assets/top-down-view.webp";
-import topDownImg2 from "./assets/top-down-view2.jpeg";
-import carouselImg from "./assets/carousel.png";
-import kaskprotone from "./assets/kaskprotone.avif";
-import kaskprotonebot from "./assets/kaskprotone-bot.avif";
-import kaskmojito from "./assets/kaskmojito.webp";
-import kaskmojitobot from "./assets/kaskmojito-bot.jpeg";
-import example1 from "./assets/examplekav.png"
+import example1 from "./assets/examplekav.png";
+import exampleBotImg from "./assets/helmet-bottoms/kaskprotoneicon2-bot.jpg";
 
 import { Model } from "./components/Helmet_giro";
 import { Canvas } from "@react-three/fiber";
@@ -27,6 +21,7 @@ import shapesImg from "./assets/measure-shapes.jpg";
 
 import Navigation from "./components/Navigation";
 import HeadShapeImage from "./components/HeadShapeImage";
+import HelmetFitOverlay from "./components/HelmetFitOverlay";
 
 export default function HelmetFinder() {
   const [circumference, setCircumference] = useState("");
@@ -71,7 +66,7 @@ export default function HelmetFinder() {
 
       // If the comparator function returns a negative, a comes before b
       const kavHelmet = scoredHelmets.find(
-        (helmet) => helmet["Helmet Name"] === "KAV Portola Kaze"
+        (helmet) => helmet["Helmet Name"] === "Portola Kaze"
       );
       scoredHelmets.sort((a, b) => a.fitScore - b.fitScore);
       const topHelmets = scoredHelmets.slice(0, 2);
@@ -272,20 +267,35 @@ export default function HelmetFinder() {
                 if (helmet.Image) {
                   helmetImage = require(`./assets/helmets/${helmet.Image}`);
                 }
-                console.log(`./assets/helmets/${helmet.Image}`);
+
+                const titles = ["Good choice", "Runner-up", "Our pick"];
+                const title = titles[index] || "Option";
+
                 return (
                   <div
                     key={index}
-                    className="helmet-info p-4 border border-gray-200 rounded-lg"
+                    className="p-6 border border-gray-200 rounded-lg hover-bounce cursor-pointer"
+                    onClick={() => goToStep(4 + index)}
                   >
-                    <h3 className="font-semibold text-lg mb-2">
-                      {helmet["Helmet Name"]}
-                    </h3>
+                    <h3 className="font-bold text-2xl pb-6">{title}</h3>
+                    <div className="w-full h-48 mb-2 flex justify-center items-center">
+                      <img
+                        src={helmetImage}
+                        alt={helmet["Helmet Name"]}
+                        className="max-h-full max-w-full object-contain"
+                      />
+                    </div>
+                    <p className="text-xl font-semibold text-gray-500">
+                      {helmet["Helmet Brand"]}
+                    </p>
+                    <h4 className="font-semibold text-xl">
+                      {helmet["Helmet Name"]} {helmet["Price"]}
+                    </h4>
+                    <p className="text-md text-gray-600">
+                      {helmet["Description"]}
+                    </p>
                     {/* <p className="text-sm text-gray-600">
                     VTech Rating: {helmet["VTech Rating"]}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    Price: ${helmet["Retail Price"]}
                   </p>
                   <p className="text-sm text-gray-600">
                     Width Gap: {helmet.userWidGap.toFixed(2)}
@@ -296,160 +306,149 @@ export default function HelmetFinder() {
                   <p className="text-sm text-gray-600">
                     Fit Score: {helmet.fitScore.toFixed(2)}
                   </p> */}
-                    <img src={helmetImage} alt={helmet["Helmet Name"]} />
                   </div>
                 );
               })}
             </div>
           </div>
           {/** Choice 1 */}
-          <div className="min-h-screen flex justify-center items-center">
-            <div className="flex flex-row items-center justify-around w-full">
-              {/* Left Side - Images */}
-              <div className="relative w-1/2 h-auto">
-                <img
-                  src={topDownImg2}
-                  alt="Head Model"
-                  className="w-full h-auto"
-                />
-                <img
-                  src={kaskprotone}
-                  alt={"Kask Protone"}
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2/3 h-auto opacity-70"
-                />
+          <div className="min-h-screen flex items-center px-8" id="step-4">
+            <div className="flex flex-row w-full">
+              {/* Left Side - Helmet Bottom Image */}
+              <div className="w-1/2 flex justify-start items-center pr-8">
+                {bestHelmets[0] && bestHelmets[0].Bottom && (
+                  <img
+                    src={require(`./assets/helmet-bottoms/${bestHelmets[0].Bottom}`)}
+                    alt={`${bestHelmets[0]["Helmet Name"]} Bottom`}
+                    className="max-h-full max-w-full object-contain" // Adjust
+                  />
+                )}
               </div>
-              {/* <div className="relative w-1/2 h-auto">
-                <img
-                  src={headModelImg}
-                  alt="Head Model"
-                  className="w-full h-auto"
-                />
-                <img
-                  src={require(`./assets/helmets/${bestHelmets[0].Image}`)}
-                  alt={bestHelmets[0]["Helmet Name"]}
-                  className="absolute top-0 left-0 w-full h-auto opacity-50"
-                />
-              </div> */}
-              {/* Right Side - Helmet Bottom Image */}
-              <div className="w-1/2 h-auto flex justify-center items-center relative">
-                <img
-                  src={kaskprotonebot}
-                  alt="Helmet Bottom"
-                  className="w-full h-auto"
-                />
-                <div
-                  className="absolute top-0 left-0 w-full h-full flex justify-center items-center transition-opacity duration-100"
-                  style={{
-                    backgroundColor: "rgba(173, 216, 230, 0.5)",
-                    borderRadius: "50%",
-                    width: "40%",
-                    height: "80%",
-                    transform: "translate(-50%, -50%)",
-                    top: "50%",
-                    left: "50%",
-                  }}
-                >
-                  {/* Hover effect */}
-                  <div
-                    className="absolute w-full h-full bg-blue-100 opacity-0 hover:opacity-100 transition-opacity duration-100"
-                    style={{
-                      borderRadius: "50%",
-                    }}
-                  >
-                    <div>
-                      {/* <p className="text-sm text-gray-600">
-                        Width Gap: {bestHelmets[0].userWidGap.toFixed(2)}
-                      </p>
-                      <p className="text-sm text-gray-600">
-                        Length Gap: {bestHelmets[0].userLenGap.toFixed(2)}
-                      </p>
-                      <p className="text-sm text-gray-600">
-                        Fit Score: {bestHelmets[0].fitScore.toFixed(2)}
-                      </p> */}
+              {/* {bestHelmets[0] && bestHelmets[0].Bottom && (
+              <HelmetFitOverlay
+                widthGap={bestHelmets[0].userWidGap}
+                lengthGap={bestHelmets[0].userLenGap}
+                imageSrc={require(`./assets/helmet-bottoms/${bestHelmets[0].Bottom}`)}
+                helmetName={bestHelmets[0]["Helmet Name"]}
+              />
+              )}
+               */}
+              {/* Right Side - Helmet Details */}
+              <div className="w-1/2 pl-8">
+                {bestHelmets[0] && (
+                  <div>
+                    <p className="text-3xl font-semibold text-gray-500">
+                      {bestHelmets[0]["Helmet Brand"]}
+                    </p>
+                    <div className="flex justify-between items-center">
+                      <h4 className="font-semibold text-5xl">
+                        {bestHelmets[0]["Helmet Name"]}
+                      </h4>
+                      <span className="text-3xl font-semibold">
+                        {bestHelmets[0]["Price"]}
+                      </span>
                     </div>
+                    <p className="text-xl mt-6">
+                      Size: {bestHelmets[0]["Size"]}
+                    </p>
+                    <p className="text-xl mt-6">
+                      Width Gap: {bestHelmets[0].userWidGap.toFixed(2)} mm
+                    </p>
+                    <p className="text-xl">
+                      Length Gap: {bestHelmets[0].userLenGap.toFixed(2)} mm
+                    </p>
+                    <p className="text-xl">
+                      VTech Rating: {bestHelmets[0]["VTech Rating"]}
+                    </p>
+                    <p className="text-xl mt-6">Details:</p>
+                    <p className="text-xl mt-6">Size & Fit:</p>
+                    <p className="text-xl mt-6">Material & Care:</p>
+                    <p className="text-xl mt-6">Brand Info:</p>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
-          <div className="min-h-screen flex justify-center items-center">
-            <img src={carouselImg} alt="carousel" />
-          </div>
-          <div className="min-h-screen flex justify-center items-center">
-            <div className="flex flex-row items-center justify-around w-full">
-              {/* Left Side - Images */}
-              <div className="relative w-1/2 h-auto">
-                <img
-                  src={topDownImg2}
-                  alt="Head Model"
-                  className="w-full h-auto"
-                />
-                <img
-                  src={kaskmojito}
-                  alt={"Kask Protone"}
-                  className="absolute top-0 left-0 w-fufll h-auto opacity-70"
-                />
-              </div>
-              {/* <div className="relative w-1/2 h-auto">
-                <img
-                  src={headModelImg}
-                  alt="Head Model"
-                  className="w-full h-auto"
-                />
-                <img
-                  src={require(`./assets/helmets/${bestHelmets[0].Image}`)}
-                  alt={bestHelmets[0]["Helmet Name"]}
-                  className="absolute top-0 left-0 w-full h-auto opacity-50"
-                />
-              </div> */}
-              {/* Right Side - Helmet Bottom Image */}
-              <div className="w-1/2 h-auto flex justify-center items-center relative">
-                <img
-                  src={kaskmojitobot}
-                  alt="Helmet Bottom"
-                  className="w-full h-auto"
-                />
-                <div
-                  className="absolute top-0 left-0 w-full h-full flex justify-center items-center transition-opacity duration-100"
-                  style={{
-                    backgroundColor: "rgba(173, 216, 230, 0.5)",
-                    borderRadius: "50%",
-                    width: "40%",
-                    height: "80%",
-                    transform: "translate(-50%, -50%)",
-                    top: "50%",
-                    left: "50%",
-                  }}
-                >
-                  {/* Hover effect */}
-                  <div
-                    className="absolute w-full h-full bg-blue-100 opacity-0 hover:opacity-100 transition-opacity duration-100"
-                    style={{
-                      borderRadius: "50%",
-                    }}
-                  >
-                    <div>
-                      {/* <p className="text-sm text-gray-600">
-                        Width Gap: {bestHelmets[1].userWidGap.toFixed(2)}
-                      </p>
-                      <p className="text-sm text-gray-600">
-                        Length Gap: {bestHelmets[1].userLenGap.toFixed(2)}
-                      </p>
-                      <p className="text-sm text-gray-600">
-                        Fit Score: {bestHelmets[1].fitScore.toFixed(2)}
-                      </p> */}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="min-h-screen flex justify-center items-center">
-            <img src={carouselImg} alt="carousel" />
+          <div className="min-h-screen flex items-center">
+            <img src={exampleBotImg} alt="exmapleBotImg" />
           </div>
           {/** Choice 2 */}
+          <div className="min-h-screen flex items-center px-8" id="step-5">
+            <div className="flex flex-row w-full">
+              {/* Left Side - Helmet Bottom Image */}
+              <div className="w-1/2 flex justify-start items-center pr-8">
+                {bestHelmets[1] && bestHelmets[1].Bottom && (
+                  <img
+                    src={require(`./assets/helmet-bottoms/${bestHelmets[1].Bottom}`)}
+                    alt={`${bestHelmets[1]["Helmet Name"]} Bottom`}
+                    className="max-h-full max-w-full object-contain" // Adjust
+                  />
+                )}
+              </div>
+              {/* Right Side - Helmet Details */}
+              <div className="w-1/2 pl-8">
+                {bestHelmets[1] && (
+                  <div>
+                    <p className="text-3xl font-semibold text-gray-500">
+                      {bestHelmets[1]["Helmet Brand"]}
+                    </p>
+                    <div className="flex justify-between items-center">
+                      <h4 className="font-semibold text-5xl">
+                        {bestHelmets[1]["Helmet Name"]}
+                      </h4>
+                      <span className="text-3xl font-semibold">
+                        {bestHelmets[1]["Price"]}
+                      </span>
+                    </div>
+                    <p className="text-xl mt-6">
+                      Size: {bestHelmets[1]["Size"]}
+                    </p>
+                    <p className="text-xl mt-6">
+                      Width Gap: {bestHelmets[1].userWidGap.toFixed(2)} mm
+                    </p>
+                    <p className="text-xl">
+                      Length Gap: {bestHelmets[1].userLenGap.toFixed(2)} mm
+                    </p>
+                    <p className="text-xl">
+                      VTech Rating: {bestHelmets[1]["VTech Rating"]}
+                    </p>
+                    <p className="text-xl mt-6">Details:</p>
+                    <p className="text-xl mt-6">Size & Fit:</p>
+                    <p className="text-xl mt-6">Material & Care:</p>
+                    <p className="text-xl mt-6">Brand Info:</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+          <div
+            className="min-h-screen flex flex-col justify-center items-center"
+            id="step-6"
+          >
+            <Canvas
+              className="canvas"
+              style={{ width: "100%", height: "100vh" }}
+            >
+              <OrbitControls enableZoom={false} />
+              <ambientLight intensity={0.5} />
+              <directionalLight position={[-2, 5, 2]} intesity={1} />
+              <Suspense fallback={null}>
+                <Model />
+              </Suspense>
+            </Canvas>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
 
-          {/* <div className="min-h-screen flex justify-center items-center">
+{
+  /** Choice 2 */
+}
+
+{
+  /* <div className="min-h-screen flex justify-center items-center">
             <div className="flex flex-row items-center justify-around w-full">
               <div className="relative w-1/2 h-auto">
                 <img
@@ -502,56 +501,39 @@ export default function HelmetFinder() {
                 </div>
               </div>
             </div>
-          </div> */}
-          <div className="min-h-screen flex flex-col justify-center items-center">
-            <img source={example1} alt="example1" className="w-full h-auto" />
-          </div>
-          <div className="min-h-screen flex flex-col justify-center items-center">
-            <Canvas
-              className="canvas"
-              style={{ width: "100%", height: "100vh" }}
-            >
-              <OrbitControls enableZoom={false} />
-              <ambientLight intensity={0.5} />
-              <directionalLight position={[-2, 5, 2]} intesity={1} />
-              <Suspense fallback={null}>
-                <Model />
-              </Suspense>
-            </Canvas>
-          </div>
-        </>
-      )}
-    </div>
-  );
+          </div> */
 }
 
-//   <div>
-//   <h2 className="text-2xl font-bold mb-4">Helmet Fit Visualization</h2>
-//   <div className="grid grid-cols-1 gap-4">
-//     {bestHelmets.map((helmet, index) => {
-//       const helmetImage = require(`./assets/helmets/${helmet.Image}`);
-//       return (
-//         <div
-//           key={index}
-//           className="p-4 border border-gray-200 rounded-lg"
-//         >
-//           <h3 className="font-semibold text-lg mb-2">
-//             {helmet["Helmet Name"]}
-//           </h3>
-//           <div className="relative">
-//             <img
-//               src={headModelImg}
-//               alt="Head Model"
-//               className="w-full h-auto"
-//             />
-//             <img
-//               src={helmetImage}
-//               alt={helmet["Helmet Name"]}
-//               className="absolute top-[-360px] left-0 w-full h-auto opacity-50"
-//             />
-//           </div>
-//         </div>
-//       );
-//     })}
-//   </div>
-// </div>
+{
+  /* <div
+  className="absolute top-0 left-0 w-full h-full flex justify-center items-center transition-opacity duration-100"
+  style={{
+    backgroundColor: "rgba(173, 216, 230, 0.5)",
+    borderRadius: "50%",
+    width: "40%",
+    height: "80%",
+    transform: "translate(-50%, -50%)",
+    top: "50%",
+    left: "50%",
+  }}
+>
+  <div
+    className="absolute w-full h-full bg-blue-100 opacity-0 hover:opacity-100 transition-opacity duration-100"
+    style={{
+      borderRadius: "50%",
+    }}
+  >
+    <div>
+      <p className="text-sm text-gray-600">
+        Width Gap: {bestHelmets[0].userWidGap.toFixed(2)}
+      </p>
+      <p className="text-sm text-gray-600">
+        Length Gap: {bestHelmets[0].userLenGap.toFixed(2)}
+      </p>
+      <p className="text-sm text-gray-600">
+        Fit Score: {bestHelmets[0].fitScore.toFixed(2)}
+      </p>
+    </div>
+  </div>
+</div>; */
+}

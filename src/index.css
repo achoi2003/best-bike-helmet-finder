@@ -25,4 +25,12 @@ input[type='range']::-moz-range-thumb {
 .ellipse-hover:hover {
   background-color: rgba(173, 216, 230, 1); /* Full opacity on hover */
 }
+
+.hover-bounce {
+  transition: transform 0.3s;
+}
+
+.hover-bounce:hover {
+  transform: translateY(-10px);
+}
   
