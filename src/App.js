@@ -22,6 +22,7 @@ import shapesImg from "./assets/measure-shapes.jpg";
 import Navigation from "./components/Navigation";
 import HeadShapeImage from "./components/HeadShapeImage";
 import HelmetFitOverlay from "./components/HelmetFitOverlay";
+import HelmetVisualization from "./components/HelmetVisualization";
 
 export default function HelmetFinder() {
   const [circumference, setCircumference] = useState("");
@@ -47,11 +48,9 @@ export default function HelmetFinder() {
     // For each helmet in helmetData...
     if (circumference && headShape) {
       let scoredHelmets = helmetData.map((helmet) => {
-        let { fitScore, userWidGap, userLenGap } = calculateFit(
-          helmet,
-          circumference,
-          headShape
-        );
+        let { fitScore, userWidGap, userLenGap, widthCalc, lengthCalc } =
+          calculateFit(helmet, circumference, headShape);
+        // console.log(helmet['Helmet Name'] + " len: " + lengthCalc)
         // console.log(helmet['Helmet Name'] + " circumference: " + circumference)
         // console.log(helmet['Helmet Name'] + " headShape: " + headShape)
         // console.log(helmet['Helmet Name'] + " lenGap: " + userLenGap)
@@ -61,6 +60,8 @@ export default function HelmetFinder() {
           fitScore,
           userWidGap,
           userLenGap,
+          widthCalc,
+          lengthCalc,
         };
       });
 
@@ -69,10 +70,21 @@ export default function HelmetFinder() {
         (helmet) => helmet["Helmet Name"] === "Portola Kaze"
       );
       scoredHelmets.sort((a, b) => a.fitScore - b.fitScore);
-      const topHelmets = scoredHelmets.slice(0, 2);
-      if (kavHelmet) {
-        topHelmets.push(kavHelmet);
-      }
+
+      // change to 3
+      const topHelmets = scoredHelmets.slice(0, 3);
+      // if (kavHelmet) {
+      //   topHelmets.push(kavHelmet);
+      // }
+
+      // test
+      // const testHelmet = scoredHelmets.find(
+      //   (helmet) => helmet["Helmet Name"] === "S-Works Prevail 3"
+      // );
+      // if (testHelmet) {
+      //   topHelmets.push(testHelmet)
+      // }
+
       setBestHelmets(topHelmets);
     }
   }, [circumference, headShape]);
@@ -105,10 +117,14 @@ export default function HelmetFinder() {
         ? 999
         : Math.sqrt(Math.pow(userWidGap, 2) + Math.pow(userLenGap, 2));
 
+    // console.log(helmet['Helmet Name'] + " lengthCalc: " + lengthCalc)
+
     return {
       fitScore,
       userWidGap,
       userLenGap,
+      widthCalc,
+      lengthCalc,
     };
   }
 
@@ -122,13 +138,16 @@ export default function HelmetFinder() {
   }
 
   return (
-    <div className="container mx-auto p-4 md:px-16 lg:px-32">
-      <Navigation
-        circumference={circumference}
-        headShape={headShape}
-        step={step}
-        goToStep={goToStep}
-      />
+    <div className="container mx-auto">
+      {/* Navigation hidden on small screens, visible on medium and large screens */}
+      <div className="hidden md:block lg:block">
+        <Navigation
+          circumference={circumference}
+          headShape={headShape}
+          step={step}
+          goToStep={goToStep}
+        />
+      </div>
       {/* Step 1: Head Circumference */}
       <div
         className="min-h-screen flex flex-col justify-center items-center"
@@ -136,18 +155,22 @@ export default function HelmetFinder() {
       >
         {/* Title */}
         <div className="w-full absolute top-0 left-0 pt-8 pl-16">
+          {" "}
+          {/** adjust this for small screen*/}
           <div className="h-2 bg-black w-3/5"></div>
-          <h1 className="text-6xl font-bold mt-2 ml-4">
+          <h1 className="lg:text-6xl md:text-6xl sm:text-4xl font-bold mt-2 ml-4">
+            {" "}
+            {/** what is going on? */}
             The Bike Helmet Finder
           </h1>
         </div>
         <label
           htmlFor="circumference-range"
-          className="block text-2xl font-bold"
+          className="block lg:text-2xl md:text-2xl sm:text-xl font-bold"
         >
           Step 1: Head Circumference (cm)
         </label>
-        <div className="text-center text-l mt-2 pb-14 flex items-center justify-center">
+        <div className="text-center lg:text-l md:text-l sm: text-sm mt-2 pb-14 flex items-center justify-center">
           Adjust the slider to match your head circumference
           <div className="ml-1">
             <Tooltip image={measureImg} />
@@ -268,7 +291,7 @@ export default function HelmetFinder() {
                   helmetImage = require(`./assets/helmets/${helmet.Image}`);
                 }
 
-                const titles = ["Good choice", "Runner-up", "Our pick"];
+                const titles = ["Adequate fit", "Better fit", "Our pick"];
                 const title = titles[index] || "Option";
 
                 return (
@@ -289,7 +312,7 @@ export default function HelmetFinder() {
                       {helmet["Helmet Brand"]}
                     </p>
                     <h4 className="font-semibold text-xl">
-                      {helmet["Helmet Name"]} {helmet["Price"]}
+                      {helmet["Helmet Name"]} ${helmet["Price"]}
                     </h4>
                     <p className="text-md text-gray-600">
                       {helmet["Description"]}
@@ -315,26 +338,13 @@ export default function HelmetFinder() {
           <div className="min-h-screen flex items-center px-8" id="step-4">
             <div className="flex flex-row w-full">
               {/* Left Side - Helmet Bottom Image */}
-              <div className="w-1/2 flex justify-start items-center pr-8">
-                {bestHelmets[0] && bestHelmets[0].Bottom && (
-                  <img
-                    src={require(`./assets/helmet-bottoms/${bestHelmets[0].Bottom}`)}
-                    alt={`${bestHelmets[0]["Helmet Name"]} Bottom`}
-                    className="max-h-full max-w-full object-contain" // Adjust
-                  />
+              <div>
+                {bestHelmets[0] && (
+                  <HelmetVisualization helmet={bestHelmets[0]} />
                 )}
               </div>
-              {/* {bestHelmets[0] && bestHelmets[0].Bottom && (
-              <HelmetFitOverlay
-                widthGap={bestHelmets[0].userWidGap}
-                lengthGap={bestHelmets[0].userLenGap}
-                imageSrc={require(`./assets/helmet-bottoms/${bestHelmets[0].Bottom}`)}
-                helmetName={bestHelmets[0]["Helmet Name"]}
-              />
-              )}
-               */}
               {/* Right Side - Helmet Details */}
-              <div className="w-1/2 pl-8">
+              <div className="w-1/2 pl-16">
                 {bestHelmets[0] && (
                   <div>
                     <p className="text-3xl font-semibold text-gray-500">
@@ -345,7 +355,7 @@ export default function HelmetFinder() {
                         {bestHelmets[0]["Helmet Name"]}
                       </h4>
                       <span className="text-3xl font-semibold">
-                        {bestHelmets[0]["Price"]}
+                        ${bestHelmets[0]["Price"]}
                       </span>
                     </div>
                     <p className="text-xl mt-6">
@@ -358,35 +368,48 @@ export default function HelmetFinder() {
                       Length Gap: {bestHelmets[0].userLenGap.toFixed(2)} mm
                     </p>
                     <p className="text-xl">
+                      Helmet Exterior Length:{" "}
+                      {bestHelmets[0]["Length Exterior"]} mm
+                    </p>
+                    <p className="text-xl">
+                      Helmet Exterior Width: {bestHelmets[0]["Width Exterior"]}{" "}
+                      mm
+                    </p>
+                    <p className="text-xl">
+                      Helmet Interior Length:{" "}
+                      {bestHelmets[0]["Length Interior"]} mm
+                    </p>
+                    <p className="text-xl">
+                      Helmet Interior Width: {bestHelmets[0]["Width Interior"]}{" "}
+                      mm
+                    </p>
+                    <p className="text-xl">
+                      User Head Length: {bestHelmets[0].lengthCalc.toFixed(2)}{" "}
+                      mm
+                    </p>
+                    <p className="text-xl">
+                      User Head Width: {bestHelmets[0].widthCalc.toFixed(2)} mm
+                    </p>
+                    <p className="text-xl">
                       VTech Rating: {bestHelmets[0]["VTech Rating"]}
                     </p>
-                    <p className="text-xl mt-6">Details:</p>
-                    <p className="text-xl mt-6">Size & Fit:</p>
-                    <p className="text-xl mt-6">Material & Care:</p>
-                    <p className="text-xl mt-6">Brand Info:</p>
                   </div>
                 )}
               </div>
             </div>
           </div>
-          <div className="min-h-screen flex items-center">
-            <img src={exampleBotImg} alt="exmapleBotImg" />
-          </div>
           {/** Choice 2 */}
           <div className="min-h-screen flex items-center px-8" id="step-5">
             <div className="flex flex-row w-full">
               {/* Left Side - Helmet Bottom Image */}
-              <div className="w-1/2 flex justify-start items-center pr-8">
-                {bestHelmets[1] && bestHelmets[1].Bottom && (
-                  <img
-                    src={require(`./assets/helmet-bottoms/${bestHelmets[1].Bottom}`)}
-                    alt={`${bestHelmets[1]["Helmet Name"]} Bottom`}
-                    className="max-h-full max-w-full object-contain" // Adjust
-                  />
+              <div>
+                {bestHelmets[1] && (
+                  <HelmetVisualization helmet={bestHelmets[1]} />
                 )}
               </div>
               {/* Right Side - Helmet Details */}
-              <div className="w-1/2 pl-8">
+              {/* Right Side - Helmet Details */}
+              <div className="w-1/2 pl-16">
                 {bestHelmets[1] && (
                   <div>
                     <p className="text-3xl font-semibold text-gray-500">
@@ -397,7 +420,7 @@ export default function HelmetFinder() {
                         {bestHelmets[1]["Helmet Name"]}
                       </h4>
                       <span className="text-3xl font-semibold">
-                        {bestHelmets[1]["Price"]}
+                        ${bestHelmets[1]["Price"]}
                       </span>
                     </div>
                     <p className="text-xl mt-6">
@@ -410,12 +433,31 @@ export default function HelmetFinder() {
                       Length Gap: {bestHelmets[1].userLenGap.toFixed(2)} mm
                     </p>
                     <p className="text-xl">
+                      Helmet Exterior Length:{" "}
+                      {bestHelmets[1]["Length Exterior"]} mm
+                    </p>
+                    <p className="text-xl">
+                      Helmet Exterior Width: {bestHelmets[1]["Width Exterior"]}{" "}
+                      mm
+                    </p>
+                    <p className="text-xl">
+                      Helmet Interior Length:{" "}
+                      {bestHelmets[1]["Length Interior"]} mm
+                    </p>
+                    <p className="text-xl">
+                      Helmet Interior Width: {bestHelmets[1]["Width Interior"]}{" "}
+                      mm
+                    </p>
+                    <p className="text-xl">
+                      User Head Length: {bestHelmets[1].lengthCalc.toFixed(2)}{" "}
+                      mm
+                    </p>
+                    <p className="text-xl">
+                      User Head Width: {bestHelmets[1].widthCalc.toFixed(2)} mm
+                    </p>
+                    <p className="text-xl">
                       VTech Rating: {bestHelmets[1]["VTech Rating"]}
                     </p>
-                    <p className="text-xl mt-6">Details:</p>
-                    <p className="text-xl mt-6">Size & Fit:</p>
-                    <p className="text-xl mt-6">Material & Care:</p>
-                    <p className="text-xl mt-6">Brand Info:</p>
                   </div>
                 )}
               </div>
@@ -425,7 +467,8 @@ export default function HelmetFinder() {
             className="min-h-screen flex flex-col justify-center items-center"
             id="step-6"
           >
-            <Canvas
+            KAV is the best!
+            {/* <Canvas
               className="canvas"
               style={{ width: "100%", height: "100vh" }}
             >
@@ -435,7 +478,7 @@ export default function HelmetFinder() {
               <Suspense fallback={null}>
                 <Model />
               </Suspense>
-            </Canvas>
+            </Canvas> */}
           </div>
         </>
       )}
