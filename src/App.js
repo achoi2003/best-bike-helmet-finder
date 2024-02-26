@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, Suspense } from "react";
 import { useSwipeable } from "react-swipeable";
-import helmetData from "./helmets-data-modified.json";
+import helmetData from "./helmets-data-modified2.json";
 
 import veryRoundImg from "./assets/head-shape/Baseline+2dev.png";
 import roundImg from "./assets/head-shape/Baseline+1dev.png";
@@ -378,30 +378,6 @@ export default function HelmetFinder() {
                           Length Gap: {bestHelmets[0].userLenGap.toFixed(2)} mm
                         </p>
                         <p className="text-xl">
-                          Helmet Exterior Length:{" "}
-                          {bestHelmets[0]["Length Exterior"]} mm
-                        </p>
-                        <p className="text-xl">
-                          Helmet Exterior Width:{" "}
-                          {bestHelmets[0]["Width Exterior"]} mm
-                        </p>
-                        <p className="text-xl">
-                          Helmet Interior Length:{" "}
-                          {bestHelmets[0]["Length Interior"]} mm
-                        </p>
-                        <p className="text-xl">
-                          Helmet Interior Width:{" "}
-                          {bestHelmets[0]["Width Interior"]} mm
-                        </p>
-                        <p className="text-xl">
-                          User Head Length:{" "}
-                          {bestHelmets[0].lengthCalc.toFixed(2)} mm
-                        </p>
-                        <p className="text-xl">
-                          User Head Width: {bestHelmets[0].widthCalc.toFixed(2)}{" "}
-                          mm
-                        </p>
-                        <p className="text-xl">
                           VTech Rating: {bestHelmets[0]["VTech Rating"]}
                         </p>
                       </div>
@@ -441,30 +417,6 @@ export default function HelmetFinder() {
                         </p>
                         <p className="text-xl">
                           Length Gap: {bestHelmets[1].userLenGap.toFixed(2)} mm
-                        </p>
-                        <p className="text-xl">
-                          Helmet Exterior Length:{" "}
-                          {bestHelmets[1]["Length Exterior"]} mm
-                        </p>
-                        <p className="text-xl">
-                          Helmet Exterior Width:{" "}
-                          {bestHelmets[1]["Width Exterior"]} mm
-                        </p>
-                        <p className="text-xl">
-                          Helmet Interior Length:{" "}
-                          {bestHelmets[1]["Length Interior"]} mm
-                        </p>
-                        <p className="text-xl">
-                          Helmet Interior Width:{" "}
-                          {bestHelmets[1]["Width Interior"]} mm
-                        </p>
-                        <p className="text-xl">
-                          User Head Length:{" "}
-                          {bestHelmets[1].lengthCalc.toFixed(2)} mm
-                        </p>
-                        <p className="text-xl">
-                          User Head Width: {bestHelmets[1].widthCalc.toFixed(2)}{" "}
-                          mm
                         </p>
                         <p className="text-xl">
                           VTech Rating: {bestHelmets[1]["VTech Rating"]}
