@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback, Suspense } from "react";
+import { useSwipeable } from "react-swipeable";
 import helmetData from "./helmets-data-modified.json";
 
-import veryRoundImg from "./assets/head-shape/very-round-head.png";
-import roundImg from "./assets/head-shape/round-head.png";
-import intermediateImg from "./assets/head-shape/intermediate-head.png";
-import ovalImg from "./assets/head-shape/oval-head.png";
-import aeroImg from "./assets/head-shape/aero-head.png";
+import veryRoundImg from "./assets/head-shape/Baseline+2dev.png";
+import roundImg from "./assets/head-shape/Baseline+1dev.png";
+import intermediateImg from "./assets/head-shape/BaselineHead.png";
+import ovalImg from "./assets/head-shape/Baseline-1dev.png";
+import aeroImg from "./assets/head-shape/Baseline-2dev.png";
 import headModelImg from "./assets/head-model.jpeg";
 import topDownImg from "./assets/top-down-view.webp";
 import example1 from "./assets/examplekav.png";
@@ -23,6 +24,7 @@ import Navigation from "./components/Navigation";
 import HeadShapeImage from "./components/HeadShapeImage";
 import HelmetFitOverlay from "./components/HelmetFitOverlay";
 import HelmetVisualization from "./components/HelmetVisualization";
+import HelmetItem from "./components/HelmetItem";
 
 export default function HelmetFinder() {
   const [circumference, setCircumference] = useState("");
@@ -137,8 +139,24 @@ export default function HelmetFinder() {
     setHeadShape(Number(value));
   }
 
+  const [showVisualization, setShowVisualization] = useState(
+    Array(bestHelmets.length).fill(false)
+  );
+
+  const showHelmetVisualization = (index) => {
+    const updatedShow = [...showVisualization];
+    updatedShow[index] = !updatedShow[index];
+    setShowVisualization(updatedShow);
+  };
+
+  // const swipeHandlers = bestHelmets.map((helmet, index) =>
+  //   useSwipeable({
+  //     onSwipedLeft: () => showHelmetVisualization(index),
+  //   })
+  // );
+
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto p-4">
       {/* Navigation hidden on small screens, visible on medium and large screens */}
       <div className="hidden md:block lg:block">
         <Navigation
@@ -170,7 +188,7 @@ export default function HelmetFinder() {
         >
           Step 1: Head Circumference (cm)
         </label>
-        <div className="text-center lg:text-l md:text-l sm: text-sm mt-2 pb-14 flex items-center justify-center">
+        <div className="text-center lg:text-xl md:text-l sm: text-sm mt-2 pb-14 flex items-center justify-center">
           Adjust the slider to match your head circumference
           <div className="ml-1">
             <Tooltip image={measureImg} />
@@ -223,7 +241,7 @@ export default function HelmetFinder() {
             id="step-2"
           >
             <h1 className="block text-2xl font-bold">Step 2: Head Shape</h1>
-            <div className="text-center text-l mt-2 pb-14 flex items-center justify-center">
+            <div className="text-center text-xl mt-2 pb-14 flex items-center justify-center">
               Select the head shape that most closely resembles yours
               <div className="ml-1">
                 <Tooltip image={shapesImg} />
@@ -232,7 +250,7 @@ export default function HelmetFinder() {
             {/** Very Round */}
             <div className="mt-2 flex justify-around">
               <HeadShapeImage
-                src={topDownImg}
+                src={veryRoundImg}
                 alt={"Very Round"}
                 handleHeadShapeChange={handleHeadShapeChange}
                 value={1.2}
@@ -240,7 +258,7 @@ export default function HelmetFinder() {
               />
               {/** Round */}
               <HeadShapeImage
-                src={topDownImg}
+                src={roundImg}
                 alt={"Round"}
                 handleHeadShapeChange={handleHeadShapeChange}
                 value={1.225}
@@ -248,7 +266,7 @@ export default function HelmetFinder() {
               />
               {/** Intermediate */}
               <HeadShapeImage
-                src={topDownImg}
+                src={intermediateImg}
                 alt={"Intermediate"}
                 handleHeadShapeChange={handleHeadShapeChange}
                 value={1.25}
@@ -256,7 +274,7 @@ export default function HelmetFinder() {
               />
               {/** Oval */}
               <HeadShapeImage
-                src={topDownImg}
+                src={ovalImg}
                 alt={"Oval"}
                 handleHeadShapeChange={handleHeadShapeChange}
                 value={1.275}
@@ -264,7 +282,7 @@ export default function HelmetFinder() {
               />
               {/** Aero */}
               <HeadShapeImage
-                src={topDownImg}
+                src={aeroImg}
                 alt={"Aero"}
                 handleHeadShapeChange={handleHeadShapeChange}
                 value={1.3}
@@ -286,189 +304,182 @@ export default function HelmetFinder() {
             </h1>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {bestHelmets.map((helmet, index) => {
-                let helmetImage;
-                if (helmet.Image) {
-                  helmetImage = require(`./assets/helmets/${helmet.Image}`);
-                }
-
-                const titles = ["Adequate fit", "Better fit", "Our pick"];
-                const title = titles[index] || "Option";
-
-                return (
-                  <div
-                    key={index}
-                    className="p-6 border border-gray-200 rounded-lg hover-bounce cursor-pointer"
-                    onClick={() => goToStep(4 + index)}
-                  >
-                    <h3 className="font-bold text-2xl pb-6">{title}</h3>
-                    <div className="w-full h-48 mb-2 flex justify-center items-center">
-                      <img
-                        src={helmetImage}
-                        alt={helmet["Helmet Name"]}
-                        className="max-h-full max-w-full object-contain"
-                      />
-                    </div>
-                    <p className="text-xl font-semibold text-gray-500">
-                      {helmet["Helmet Brand"]}
-                    </p>
-                    <h4 className="font-semibold text-xl">
-                      {helmet["Helmet Name"]} ${helmet["Price"]}
-                    </h4>
-                    <p className="text-md text-gray-600">
-                      {helmet["Description"]}
-                    </p>
-                    {/* <p className="text-sm text-gray-600">
-                    VTech Rating: {helmet["VTech Rating"]}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    Width Gap: {helmet.userWidGap.toFixed(2)}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    Length Gap: {helmet.userLenGap.toFixed(2)}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    Fit Score: {helmet.fitScore.toFixed(2)}
-                  </p> */}
-                  </div>
+                return(
+                <HelmetItem
+                  key={index}
+                  helmet={helmet}
+                  index={index}
+                  showVisualization={showVisualization[index]}
+                  onSwipe={showHelmetVisualization}
+                />
                 );
+                
+                // return (
+                // <div
+                //   key={index}
+                //   className="p-6 border border-gray-200 rounded-lg hover-bounce cursor-pointer"
+                //   onClick={() => goToStep(4 + index)}
+                // >
+                // <h3 className="font-bold text-2xl pb-6">{title}</h3>
+                // <div className="w-full h-48 mb-2 flex justify-center items-center">
+                //   <img
+                //     src={helmetImage}
+                //     alt={helmet["Helmet Name"]}
+                //     className="max-h-full max-w-full object-contain"
+                //   />
+                // </div>
+                // <p className="text-xl font-semibold text-gray-500">
+                //   {helmet["Helmet Brand"]}
+                // </p>
+                // <h4 className="font-semibold text-xl">
+                //   {helmet["Helmet Name"]} ${helmet["Price"]}
+                // </h4>
+                // <p className="text-md text-gray-600">
+                //   {helmet["Description"]}
+                // </p>
+                // </div>
+                // );
               })}
             </div>
           </div>
-          {/** Choice 1 */}
-          <div className="min-h-screen flex items-center px-8" id="step-4">
-            <div className="flex flex-row w-full">
-              {/* Left Side - Helmet Bottom Image */}
-              <div>
-                {bestHelmets[0] && (
-                  <HelmetVisualization helmet={bestHelmets[0]} />
-                )}
-              </div>
-              {/* Right Side - Helmet Details */}
-              <div className="w-1/2 pl-16">
-                {bestHelmets[0] && (
-                  <div>
-                    <p className="text-3xl font-semibold text-gray-500">
-                      {bestHelmets[0]["Helmet Brand"]}
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <h4 className="font-semibold text-5xl">
-                        {bestHelmets[0]["Helmet Name"]}
-                      </h4>
-                      <span className="text-3xl font-semibold">
-                        ${bestHelmets[0]["Price"]}
-                      </span>
-                    </div>
-                    <p className="text-xl mt-6">
-                      Size: {bestHelmets[0]["Size"]}
-                    </p>
-                    <p className="text-xl mt-6">
-                      Width Gap: {bestHelmets[0].userWidGap.toFixed(2)} mm
-                    </p>
-                    <p className="text-xl">
-                      Length Gap: {bestHelmets[0].userLenGap.toFixed(2)} mm
-                    </p>
-                    <p className="text-xl">
-                      Helmet Exterior Length:{" "}
-                      {bestHelmets[0]["Length Exterior"]} mm
-                    </p>
-                    <p className="text-xl">
-                      Helmet Exterior Width: {bestHelmets[0]["Width Exterior"]}{" "}
-                      mm
-                    </p>
-                    <p className="text-xl">
-                      Helmet Interior Length:{" "}
-                      {bestHelmets[0]["Length Interior"]} mm
-                    </p>
-                    <p className="text-xl">
-                      Helmet Interior Width: {bestHelmets[0]["Width Interior"]}{" "}
-                      mm
-                    </p>
-                    <p className="text-xl">
-                      User Head Length: {bestHelmets[0].lengthCalc.toFixed(2)}{" "}
-                      mm
-                    </p>
-                    <p className="text-xl">
-                      User Head Width: {bestHelmets[0].widthCalc.toFixed(2)} mm
-                    </p>
-                    <p className="text-xl">
-                      VTech Rating: {bestHelmets[0]["VTech Rating"]}
-                    </p>
+          {window.innerWidth >= 768 && (
+            <>
+              {/** Choice 1 */}
+              <div className="min-h-screen flex items-center px-8" id="step-4">
+                <div className="flex flex-row w-full">
+                  {/* Left Side - Helmet Bottom Image */}
+                  <>
+                    {bestHelmets[0] && (
+                      <HelmetVisualization helmet={bestHelmets[0]} />
+                    )}
+                  </>
+                  {/* Right Side - Helmet Details */}
+                  <div className="w-1/2 pl-12">
+                    {bestHelmets[0] && (
+                      <div>
+                        <p className="text-3xl font-semibold text-gray-500">
+                          {bestHelmets[0]["Helmet Brand"]}
+                        </p>
+                        <div className="flex justify-between items-center">
+                          <h4 className="font-semibold text-5xl">
+                            {bestHelmets[0]["Helmet Name"]}
+                          </h4>
+                          <span className="text-3xl font-semibold">
+                            ${bestHelmets[0]["Price"]}
+                          </span>
+                        </div>
+                        <p className="text-xl mt-6">
+                          Size: {bestHelmets[0]["Size"]}
+                        </p>
+                        <p className="text-xl mt-6">
+                          Width Gap: {bestHelmets[0].userWidGap.toFixed(2)} mm
+                        </p>
+                        <p className="text-xl">
+                          Length Gap: {bestHelmets[0].userLenGap.toFixed(2)} mm
+                        </p>
+                        <p className="text-xl">
+                          Helmet Exterior Length:{" "}
+                          {bestHelmets[0]["Length Exterior"]} mm
+                        </p>
+                        <p className="text-xl">
+                          Helmet Exterior Width:{" "}
+                          {bestHelmets[0]["Width Exterior"]} mm
+                        </p>
+                        <p className="text-xl">
+                          Helmet Interior Length:{" "}
+                          {bestHelmets[0]["Length Interior"]} mm
+                        </p>
+                        <p className="text-xl">
+                          Helmet Interior Width:{" "}
+                          {bestHelmets[0]["Width Interior"]} mm
+                        </p>
+                        <p className="text-xl">
+                          User Head Length:{" "}
+                          {bestHelmets[0].lengthCalc.toFixed(2)} mm
+                        </p>
+                        <p className="text-xl">
+                          User Head Width: {bestHelmets[0].widthCalc.toFixed(2)}{" "}
+                          mm
+                        </p>
+                        <p className="text-xl">
+                          VTech Rating: {bestHelmets[0]["VTech Rating"]}
+                        </p>
+                      </div>
+                    )}
                   </div>
-                )}
+                </div>
               </div>
-            </div>
-          </div>
-          {/** Choice 2 */}
-          <div className="min-h-screen flex items-center px-8" id="step-5">
-            <div className="flex flex-row w-full">
-              {/* Left Side - Helmet Bottom Image */}
-              <div>
-                {bestHelmets[1] && (
-                  <HelmetVisualization helmet={bestHelmets[1]} />
-                )}
-              </div>
-              {/* Right Side - Helmet Details */}
-              {/* Right Side - Helmet Details */}
-              <div className="w-1/2 pl-16">
-                {bestHelmets[1] && (
-                  <div>
-                    <p className="text-3xl font-semibold text-gray-500">
-                      {bestHelmets[1]["Helmet Brand"]}
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <h4 className="font-semibold text-5xl">
-                        {bestHelmets[1]["Helmet Name"]}
-                      </h4>
-                      <span className="text-3xl font-semibold">
-                        ${bestHelmets[1]["Price"]}
-                      </span>
-                    </div>
-                    <p className="text-xl mt-6">
-                      Size: {bestHelmets[1]["Size"]}
-                    </p>
-                    <p className="text-xl mt-6">
-                      Width Gap: {bestHelmets[1].userWidGap.toFixed(2)} mm
-                    </p>
-                    <p className="text-xl">
-                      Length Gap: {bestHelmets[1].userLenGap.toFixed(2)} mm
-                    </p>
-                    <p className="text-xl">
-                      Helmet Exterior Length:{" "}
-                      {bestHelmets[1]["Length Exterior"]} mm
-                    </p>
-                    <p className="text-xl">
-                      Helmet Exterior Width: {bestHelmets[1]["Width Exterior"]}{" "}
-                      mm
-                    </p>
-                    <p className="text-xl">
-                      Helmet Interior Length:{" "}
-                      {bestHelmets[1]["Length Interior"]} mm
-                    </p>
-                    <p className="text-xl">
-                      Helmet Interior Width: {bestHelmets[1]["Width Interior"]}{" "}
-                      mm
-                    </p>
-                    <p className="text-xl">
-                      User Head Length: {bestHelmets[1].lengthCalc.toFixed(2)}{" "}
-                      mm
-                    </p>
-                    <p className="text-xl">
-                      User Head Width: {bestHelmets[1].widthCalc.toFixed(2)} mm
-                    </p>
-                    <p className="text-xl">
-                      VTech Rating: {bestHelmets[1]["VTech Rating"]}
-                    </p>
+              {/** Choice 2 */}
+              <div className="min-h-screen flex items-center px-8" id="step-5">
+                <div className="flex flex-row w-full">
+                  {/* Left Side - Helmet Bottom Image */}
+                  <>
+                    {bestHelmets[1] && (
+                      <HelmetVisualization helmet={bestHelmets[1]} />
+                    )}
+                  </>
+                  {/* Right Side - Helmet Details */}
+                  <div className="w-1/2 pl-12">
+                    {bestHelmets[1] && (
+                      <div>
+                        <p className="text-3xl font-semibold text-gray-500">
+                          {bestHelmets[1]["Helmet Brand"]}
+                        </p>
+                        <div className="flex justify-between items-center">
+                          <h4 className="font-semibold text-5xl">
+                            {bestHelmets[1]["Helmet Name"]}
+                          </h4>
+                          <span className="text-3xl font-semibold">
+                            ${bestHelmets[1]["Price"]}
+                          </span>
+                        </div>
+                        <p className="text-xl mt-6">
+                          Size: {bestHelmets[1]["Size"]}
+                        </p>
+                        <p className="text-xl mt-6">
+                          Width Gap: {bestHelmets[1].userWidGap.toFixed(2)} mm
+                        </p>
+                        <p className="text-xl">
+                          Length Gap: {bestHelmets[1].userLenGap.toFixed(2)} mm
+                        </p>
+                        <p className="text-xl">
+                          Helmet Exterior Length:{" "}
+                          {bestHelmets[1]["Length Exterior"]} mm
+                        </p>
+                        <p className="text-xl">
+                          Helmet Exterior Width:{" "}
+                          {bestHelmets[1]["Width Exterior"]} mm
+                        </p>
+                        <p className="text-xl">
+                          Helmet Interior Length:{" "}
+                          {bestHelmets[1]["Length Interior"]} mm
+                        </p>
+                        <p className="text-xl">
+                          Helmet Interior Width:{" "}
+                          {bestHelmets[1]["Width Interior"]} mm
+                        </p>
+                        <p className="text-xl">
+                          User Head Length:{" "}
+                          {bestHelmets[1].lengthCalc.toFixed(2)} mm
+                        </p>
+                        <p className="text-xl">
+                          User Head Width: {bestHelmets[1].widthCalc.toFixed(2)}{" "}
+                          mm
+                        </p>
+                        <p className="text-xl">
+                          VTech Rating: {bestHelmets[1]["VTech Rating"]}
+                        </p>
+                      </div>
+                    )}
                   </div>
-                )}
+                </div>
               </div>
-            </div>
-          </div>
-          <div
-            className="min-h-screen flex flex-col justify-center items-center"
-            id="step-6"
-          >
-            KAV is the best!
-            {/* <Canvas
+              <div
+                className="min-h-screen flex flex-col justify-center items-center"
+                id="step-6"
+              >
+                KAV is the best!
+                {/* <Canvas
               className="canvas"
               style={{ width: "100%", height: "100vh" }}
             >
@@ -479,7 +490,9 @@ export default function HelmetFinder() {
                 <Model />
               </Suspense>
             </Canvas> */}
-          </div>
+              </div>
+            </>
+          )}
         </>
       )}
     </div>

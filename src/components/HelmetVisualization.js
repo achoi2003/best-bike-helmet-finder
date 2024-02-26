@@ -16,8 +16,8 @@ const HelmetVisualization = ({ helmet }) => {
           <ellipse
             cx="50"
             cy="50"
-            rx={`${ellipseWidth / 2}%`}
-            ry={`${ellipseHeight / 2}%`}
+            rx={`${ellipseHeight / 2}%`}
+            ry={`${ellipseWidth / 2}%`}
             fill="rgba(135, 206, 235, 0.5)" 
             fillOpacity="0.7"
           />
