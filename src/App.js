@@ -7,17 +7,13 @@ import roundImg from "./assets/head-shape/Baseline+1dev.png";
 import intermediateImg from "./assets/head-shape/BaselineHead.png";
 import ovalImg from "./assets/head-shape/Baseline-1dev.png";
 import aeroImg from "./assets/head-shape/Baseline-2dev.png";
-import headModelImg from "./assets/head-model.jpeg";
-import topDownImg from "./assets/top-down-view.webp";
-import example1 from "./assets/examplekav.png";
-import exampleBotImg from "./assets/helmet-bottoms/kaskprotoneicon2-bot.jpg";
 
 // import { Model } from "./components/Helmet_giro";
 // import { Canvas } from "@react-three/fiber";
 // import { OrbitControls } from "@react-three/drei";
 
 import Tooltip from "./components/Tooltip";
-import measureImg from "./assets/measure-circumference.webp";
+import measureImg from "./assets/SideHeadShot.png"
 import shapesImg from "./assets/measure-shapes.jpg";
 
 import Navigation from "./components/Navigation";
@@ -190,19 +186,10 @@ export default function HelmetFinder() {
             <Tooltip image={measureImg} />
           </div> */}
         </div>
-        <div>
-          hello there! asjkldhf kjashf kl onSwipedLeftasdf
-          laskdjfh lkajshdf jkasf
-
-          asdflhj alsjkdhf lkajsdhf kljahsdf jlhasdfl;
-          asldkjfhl kasjdhjl
-          asd,jfh lakjsdfh ljksahf kljashdf kjla sdkjfl haskjfdasdljfh laskdjfh
-          hello there! asjkldhf kjashf kl onSwipedLeftasdf
-          laskdjfh lkajshdf jkasf
-
-          asdflhj alsjkdhf lkajsdhf kljahsdf jlhasdfl;
-          asldkjfhl kasjdhjl
-          asd,jfh lakjsdfh ljksahf kljashdf kjla sdkjfl haskjfdasdljfh laskdjfh
+        <div className="sm:hidden relative w-1/2">
+          <img 
+            src={measureImg} 
+          />
         </div>
         <div className="w-2/3 sm:w-1/3">
           <input
@@ -316,16 +303,16 @@ export default function HelmetFinder() {
             </h1>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {bestHelmets.map((helmet, index) => {
-                return(
-                <HelmetItem
-                  key={index}
-                  helmet={helmet}
-                  index={index}
-                  showVisualization={showVisualization[index]}
-                  onSwipe={showHelmetVisualization}
-                />
+                return (
+                  <HelmetItem
+                    key={index}
+                    helmet={helmet}
+                    index={index}
+                    showVisualization={showVisualization[index]}
+                    onSwipe={showHelmetVisualization}
+                  />
                 );
-                
+
                 // return (
                 // <div
                 //   key={index}
