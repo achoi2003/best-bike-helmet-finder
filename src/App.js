@@ -12,9 +12,9 @@ import topDownImg from "./assets/top-down-view.webp";
 import example1 from "./assets/examplekav.png";
 import exampleBotImg from "./assets/helmet-bottoms/kaskprotoneicon2-bot.jpg";
 
-import { Model } from "./components/Helmet_giro";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+// import { Model } from "./components/Helmet_giro";
+// import { Canvas } from "@react-three/fiber";
+// import { OrbitControls } from "@react-three/drei";
 
 import Tooltip from "./components/Tooltip";
 import measureImg from "./assets/measure-circumference.webp";
@@ -156,7 +156,7 @@ export default function HelmetFinder() {
   // );
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-2">
       {/* Navigation hidden on small screens, visible on medium and large screens */}
       <div className="hidden md:block lg:block">
         <Navigation
@@ -172,29 +172,39 @@ export default function HelmetFinder() {
         id="step-1"
       >
         {/* Title */}
-        <div className="w-full absolute top-0 left-0 pt-8 pl-16">
-          {" "}
-          {/** adjust this for small screen*/}
-          <div className="h-2 bg-black w-3/5"></div>
-          <h1 className="lg:text-6xl md:text-6xl sm:text-4xl font-bold mt-2 ml-4">
-            {" "}
-            {/** what is going on? */}
+        <div className="w-full absolute top-0 left-0 pt-4 sm:pt-6 pl-4 pr-4 sm:pl-16">
+          <div className="bg-black h-1 sm:h-2 w-full lg:w-4/5 xl:w-3/5"></div>
+          <h1 className="text-3xl sm:text-6xl font-bold mt-2 ml-2">
             The Bike Helmet Finder
           </h1>
         </div>
         <label
           htmlFor="circumference-range"
-          className="block lg:text-2xl md:text-2xl sm:text-xl font-bold"
+          className="block text-xl sm:text-3xl font-bold pl-4 pr-4"
         >
-          Step 1: Head Circumference (cm)
+          Step 1: Head Circumference
         </label>
-        <div className="text-center lg:text-xl md:text-l sm: text-sm mt-2 pb-14 flex items-center justify-center">
-          Adjust the slider to match your head circumference
-          <div className="ml-1">
+        <div className="text-center text-l sm:text-xl pl-4 pr-4 mt-2 pb-10 flex items-center justify-center">
+          Adjust the slider to match your head circumference (cm)
+          {/* <div className="ml-1">
             <Tooltip image={measureImg} />
-          </div>
+          </div> */}
         </div>
-        <div className="w-1/3">
+        <div>
+          hello there! asjkldhf kjashf kl onSwipedLeftasdf
+          laskdjfh lkajshdf jkasf
+
+          asdflhj alsjkdhf lkajsdhf kljahsdf jlhasdfl;
+          asldkjfhl kasjdhjl
+          asd,jfh lakjsdfh ljksahf kljashdf kjla sdkjfl haskjfdasdljfh laskdjfh
+          hello there! asjkldhf kjashf kl onSwipedLeftasdf
+          laskdjfh lkajshdf jkasf
+
+          asdflhj alsjkdhf lkajsdhf kljahsdf jlhasdfl;
+          asldkjfhl kasjdhjl
+          asd,jfh lakjsdfh ljksahf kljashdf kjla sdkjfl haskjfdasdljfh laskdjfh
+        </div>
+        <div className="w-2/3 sm:w-1/3">
           <input
             type="range"
             id="circumference-range"
@@ -224,7 +234,7 @@ export default function HelmetFinder() {
         >
           <button
             onClick={() => goToStep(2)}
-            className="mt-8 px-16 py-3 bg-gray-600 text-white rounded-3xl hover:bg-gray-700 focus:outline-none flex items-center"
+            className="mt-6 px-16 py-3 bg-gray-600 text-white rounded-3xl hover:bg-gray-700 focus:outline-none flex items-center"
           >
             <span className="ml-2"> Continue </span>
             <span className="material-icons-outlined cursor-pointer">
@@ -240,7 +250,9 @@ export default function HelmetFinder() {
             className="min-h-screen flex flex-col justify-center items-center"
             id="step-2"
           >
-            <h1 className="block text-2xl font-bold">Step 2: Head Shape</h1>
+            <h1 className="block text-xl sm:text-3xl font-bold">
+              Step 2: Head Shape
+            </h1>
             <div className="text-center text-xl mt-2 pb-14 flex items-center justify-center">
               Select the head shape that most closely resembles yours
               <div className="ml-1">
