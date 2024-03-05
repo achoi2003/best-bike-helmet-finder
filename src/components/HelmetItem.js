@@ -25,6 +25,16 @@ function HelmetItem({ helmet, index, showVisualization, onSwipe }) {
       {showVisualization ? (
         <div className="w-full h-48 mb-2 flex justify-center items-center">
           <HelmetVisualization helmet={helmet} />
+          <div>
+            <p className="text-l pl-4">Size: {helmet["Size"]}</p>
+            <p className="text-l mt-6 pl-4">
+              Width Gap: {helmet.userWidGap.toFixed(2)} mm
+            </p>
+            <p className="text-l pl-4">
+              Length Gap: {helmet.userLenGap.toFixed(2)} mm
+            </p>
+            <p className="text-l pl-4">VTech Rating: {helmet["VTech Rating"]}</p>
+          </div>
         </div>
       ) : (
         <div className="w-full h-48 mb-2 flex justify-center items-center">
@@ -35,7 +45,6 @@ function HelmetItem({ helmet, index, showVisualization, onSwipe }) {
           />
         </div>
       )}
-
       <p className="text-xl font-semibold text-gray-500">
         {helmet["Helmet Brand"]}
       </p>

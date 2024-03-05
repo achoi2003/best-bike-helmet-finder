@@ -2,18 +2,20 @@ import { useState, useEffect, useCallback, Suspense } from "react";
 import { useSwipeable } from "react-swipeable";
 import helmetData from "./helmets-data-modified2.json";
 
+import veryVeryRoundImg from "./assets/head-shape/Baseline+3dev.png";
 import veryRoundImg from "./assets/head-shape/Baseline+2dev.png";
 import roundImg from "./assets/head-shape/Baseline+1dev.png";
 import intermediateImg from "./assets/head-shape/BaselineHead.png";
 import ovalImg from "./assets/head-shape/Baseline-1dev.png";
 import aeroImg from "./assets/head-shape/Baseline-2dev.png";
+import veryAeroImg from "./assets/head-shape/Baseline-3dev..png";
 
 // import { Model } from "./components/Helmet_giro";
 // import { Canvas } from "@react-three/fiber";
 // import { OrbitControls } from "@react-three/drei";
 
 import Tooltip from "./components/Tooltip";
-import measureImg from "./assets/SideHeadShot.png"
+import measureImg from "./assets/SideHeadShot.png";
 import shapesImg from "./assets/measure-shapes.jpg";
 
 import Navigation from "./components/Navigation";
@@ -24,9 +26,11 @@ import HelmetItem from "./components/HelmetItem";
 
 export default function HelmetFinder() {
   const [circumference, setCircumference] = useState("");
-  const [headShape, setHeadShape] = useState("");
+  const [headShape, setHeadShape] = useState(1.25);
   const [bestHelmets, setBestHelmets] = useState([]);
   const [step, setStep] = useState(1);
+
+  const [measureImgSize, setMeasureImgSize] = useState(1);
 
   const goToStep = (targetStep) => {
     setStep(targetStep);
@@ -48,11 +52,7 @@ export default function HelmetFinder() {
       let scoredHelmets = helmetData.map((helmet) => {
         let { fitScore, userWidGap, userLenGap, widthCalc, lengthCalc } =
           calculateFit(helmet, circumference, headShape);
-        // console.log(helmet['Helmet Name'] + " len: " + lengthCalc)
-        // console.log(helmet['Helmet Name'] + " circumference: " + circumference)
-        // console.log(helmet['Helmet Name'] + " headShape: " + headShape)
-        // console.log(helmet['Helmet Name'] + " lenGap: " + userLenGap)
-        // console.log(helmet['Helmet Name'] + " widGap: " + userWidGap)
+
         return {
           ...helmet, // All the helmet data + new properties
           fitScore,
@@ -102,13 +102,6 @@ export default function HelmetFinder() {
     let userWidGap = Number(helmet["Width Interior"]) - widthCalc;
     let userLenGap = Number(helmet["Length Interior"]) - lengthCalc;
 
-    // console.log("Length Interior: " + helmet['Length Interior'])
-    // console.log("Width Interior: " + helmet['Width Interior'])
-    // console.log(helmet['Helmet Name'] + " userCircumference: " + userCircumference)
-    // console.log(helmet['Helmet Name'] + " userHeadShape: " + userHeadShape)
-    // console.log(helmet['Helmet Name'] + " userLenGap: " + userLenGap)
-    // console.log(helmet['Helmet Name'] + " userWidGap: " + userWidGap)
-
     // Helmets that don't fit are assigned a high unfit score of 999
     let fitScore =
       userLenGap < 0 || userWidGap < 0
@@ -129,10 +122,42 @@ export default function HelmetFinder() {
   // Update and find helmets when user changes input
   function handleCircumferenceChange(event) {
     setCircumference(Number(event.target.value) * 10);
+    setMeasureImgSize(1 + (event.target.value - 48) / 200);
   }
 
-  function handleHeadShapeChange(value) {
-    setHeadShape(Number(value));
+  const headShapeImages = {
+    1.175: {
+      image: veryVeryRoundImg,
+      description: "Very Very Round?",
+    },
+    1.2: {
+      image: veryRoundImg,
+      description: "Very Round",
+    },
+    1.225: {
+      image: roundImg,
+      description: "Round",
+    },
+    1.25: {
+      image: intermediateImg,
+      description: "Intermediate",
+    },
+    1.275: {
+      image: ovalImg,
+      description: "Oval",
+    },
+    1.3: {
+      image: aeroImg,
+      description: "Aero",
+    },
+    1.325: {
+      image: veryAeroImg,
+      description: "Very Aero?",
+    },
+  };
+
+  function handleHeadShapeChange(event) {
+    setHeadShape(Number(event.target.value));
   }
 
   const [showVisualization, setShowVisualization] = useState(
@@ -154,7 +179,7 @@ export default function HelmetFinder() {
   return (
     <div className="container mx-auto p-2">
       {/* Navigation hidden on small screens, visible on medium and large screens */}
-      <div className="hidden md:block lg:block">
+      <div className="hidden lg:block">
         <Navigation
           circumference={circumference}
           headShape={headShape}
@@ -164,7 +189,7 @@ export default function HelmetFinder() {
       </div>
       {/* Step 1: Head Circumference */}
       <div
-        className="min-h-screen flex flex-col justify-center items-center"
+        className="min-h-screen flex flex-col justify-center items-center lg:flex-row lg:items-center"
         id="step-1"
       >
         {/* Title */}
@@ -174,60 +199,71 @@ export default function HelmetFinder() {
             The Bike Helmet Finder
           </h1>
         </div>
-        <label
-          htmlFor="circumference-range"
-          className="block text-xl sm:text-3xl font-bold pl-4 pr-4"
-        >
-          Step 1: Head Circumference
-        </label>
-        <div className="text-center text-l sm:text-xl pl-4 pr-4 mt-2 pb-10 flex items-center justify-center">
-          Adjust the slider to match your head circumference (cm)
-          {/* <div className="ml-1">
+        <div className="hidden lg:block lg:w-2/5">
+          <img
+            src={measureImg}
+            alt="Measurement Guide"
+            style={{ transform: `scale(${measureImgSize})` }}
+          />
+        </div>
+        <div className="flex flex-col justify-center items-center lg:flex-grow lg:mr-36">
+          <label
+            htmlFor="circumference-range"
+            className="block text-xl sm:text-3xl font-bold pl-4 pr-4"
+          >
+            Step 1: Head Circumference
+          </label>
+          <div className="text-center text-l sm:text-xl pl-4 pr-4 mt-2 pb-4 sm:pb-6 flex items-center justify-center">
+            Adjust the slider to match your head circumference (cm)
+            {/* <div className="ml-1">
             <Tooltip image={measureImg} />
           </div> */}
-        </div>
-        <div className="sm:hidden relative w-1/2">
-          <img 
-            src={measureImg} 
-          />
-        </div>
-        <div className="w-2/3 sm:w-1/3">
-          <input
-            type="range"
-            id="circumference-range"
-            name="circumference"
-            min="48"
-            max="68"
-            step="1"
-            value={circumference / 10}
-            onChange={handleCircumferenceChange}
-            className="w-full mt-4 h-2 bg-gray-200 appearance-none cursor-pointer"
-          />
-        </div>
-        <div
-          className="text-center text-xl mt-4"
-          style={{
-            visibility: circumference > 0 ? "visible" : "hidden",
-            opacity: circumference > 0 ? 1 : 0,
-          }}
-        >
-          {circumference / 10}
-        </div>
-        <div
-          style={{
-            visibility: circumference > 0 ? "visible" : "hidden",
-            opacity: circumference > 0 ? 1 : 0,
-          }}
-        >
-          <button
-            onClick={() => goToStep(2)}
-            className="mt-6 px-16 py-3 bg-gray-600 text-white rounded-3xl hover:bg-gray-700 focus:outline-none flex items-center"
+          </div>
+          <div className="lg:hidden relative w-1/2 sm:w-1/3">
+            <img
+              src={measureImg}
+              alt="Measurement Guide"
+              style={{ transform: `scale(${measureImgSize})` }}
+            />
+          </div>
+          <div className="pt-4 w-2/3 sm:w-2/5 lg:w-2/3">
+            <input
+              type="range"
+              id="circumference-range"
+              name="circumference"
+              min="48"
+              max="68"
+              step="1"
+              value={circumference / 10}
+              onChange={handleCircumferenceChange}
+              className="w-full mt-4 h-2 bg-gray-200 appearance-none cursor-pointer"
+            />
+          </div>
+          <div
+            className="text-center text-xl mt-4"
+            style={{
+              visibility: circumference > 0 ? "visible" : "hidden",
+              opacity: circumference > 0 ? 1 : 0,
+            }}
           >
-            <span className="ml-2"> Continue </span>
-            <span className="material-icons-outlined cursor-pointer">
-              keyboard_arrow_down
-            </span>
-          </button>
+            {circumference / 10} cm
+          </div>
+          <div
+            style={{
+              visibility: circumference > 0 ? "visible" : "hidden",
+              opacity: circumference > 0 ? 1 : 0,
+            }}
+          >
+            <button
+              onClick={() => goToStep(2)}
+              className="mt-6 px-16 py-3 bg-gray-600 text-white rounded-3xl hover:bg-gray-700 focus:outline-none flex items-center"
+            >
+              <span className="ml-2"> Continue </span>
+              <span className="material-icons-outlined cursor-pointer">
+                keyboard_arrow_down
+              </span>
+            </button>
+          </div>
         </div>
       </div>
       {/* Step 2: Head Shape */}
@@ -237,16 +273,52 @@ export default function HelmetFinder() {
             className="min-h-screen flex flex-col justify-center items-center"
             id="step-2"
           >
-            <h1 className="block text-xl sm:text-3xl font-bold">
+            <label
+              htmlFor="shape-range"
+              className="block text-xl sm:text-3xl font-bold pl-4 pr-4"
+            >
               Step 2: Head Shape
-            </h1>
-            <div className="text-center text-xl mt-2 pb-14 flex items-center justify-center">
-              Select the head shape that most closely resembles yours
-              <div className="ml-1">
+            </label>
+            <div className="text-center text-l sm:text-xl pl-4 pr-4 mt-2 pb-4 sm:pb-6 flex items-center justify-center">
+              Adjust the slider to match your head shape
+              {/* <div className="ml-1">
                 <Tooltip image={shapesImg} />
-              </div>
+              </div> */}
             </div>
-            {/** Very Round */}
+            <div className="flex justify-center w-1/2 sm:w-1/3">
+              <img
+                src={headShapeImages[headShape].image}
+                alt="Selected Head Shape"
+              />
+            </div>
+            <div className="w-2/3 sm:w-2/5 lg:w-1/3">
+              <input
+                type="range"
+                id="shape-range"
+                name="shape"
+                min="1.175"
+                max="1.325"
+                step=".025"
+                value={headShape}
+                onChange={handleHeadShapeChange}
+                className="w-full mt-4 h-2 bg-gray-200 appearance-none cursor-pointer"
+              />
+            </div>
+            <div className="text center text-xl mt-4">
+              {headShapeImages[headShape].description}
+            </div>
+            <div>
+              <button
+                onClick={() => goToStep(3)}
+                className="mt-6 px-16 py-3 bg-gray-600 text-white rounded-3xl hover:bg-gray-700 focus:outline-none flex items-center"
+              >
+                <span className="ml-2"> Continue </span>
+                <span className="material-icons-outlined cursor-pointer">
+                  keyboard_arrow_down
+                </span>
+              </button>
+            </div>
+            {/* * Very Round
             <div className="mt-2 flex justify-around">
               <HeadShapeImage
                 src={veryRoundImg}
@@ -255,7 +327,7 @@ export default function HelmetFinder() {
                 value={1.2}
                 goToStep={goToStep}
               />
-              {/** Round */}
+              * Round
               <HeadShapeImage
                 src={roundImg}
                 alt={"Round"}
@@ -263,7 +335,7 @@ export default function HelmetFinder() {
                 value={1.225}
                 goToStep={goToStep}
               />
-              {/** Intermediate */}
+              * Intermediate
               <HeadShapeImage
                 src={intermediateImg}
                 alt={"Intermediate"}
@@ -271,7 +343,7 @@ export default function HelmetFinder() {
                 value={1.25}
                 goToStep={goToStep}
               />
-              {/** Oval */}
+              * Oval
               <HeadShapeImage
                 src={ovalImg}
                 alt={"Oval"}
@@ -279,7 +351,7 @@ export default function HelmetFinder() {
                 value={1.275}
                 goToStep={goToStep}
               />
-              {/** Aero */}
+              * Aero
               <HeadShapeImage
                 src={aeroImg}
                 alt={"Aero"}
@@ -287,7 +359,7 @@ export default function HelmetFinder() {
                 value={1.3}
                 goToStep={goToStep}
               />
-            </div>
+            </div> */}
           </div>
         </>
       )}
@@ -298,10 +370,13 @@ export default function HelmetFinder() {
             className="min-h-screen flex flex-col justify-center items-center"
             id="step-3"
           >
-            <h1 className="block text-2xl font-bold mb-8">
+            <h1 className="block text-xl sm:text-3xl font-bold pl-4 pr-4 lg:pb-8">
               Best Fitting Helmets
             </h1>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <h2 className="lg:hidden text-center text-l sm:text-xl pl-4 pr-4 mt-2 pb-4 sm:pb-6 flex items-center justify-center">
+              Swipe to see more.
+            </h2>
+            <div className="grid sm:grid-cols-3 gap-4">
               {bestHelmets.map((helmet, index) => {
                 return (
                   <HelmetItem
