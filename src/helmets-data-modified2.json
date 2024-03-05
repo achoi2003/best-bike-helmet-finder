@@ -107,5 +107,27 @@
         "Image Width": "800",
         "Image Height": "1009",
         "Description": "An oval helmet with an Asian fit."
+    },
+    {
+        "ID": "30",
+        "Helmet Brand": "KAV",
+        "Helmet Name": "Portola Kaze",
+        "VTech Rating": "Unrated",
+        "Circumference Min": "45",
+        "Circumference Max": "65",
+        "Material": "PolyCarbon",
+        "Length Interior": "0",
+        "Length Exterior": "0",
+        "Width Interior": "0",
+        "Width Exterior": "0",
+        "Purchase URL": "https://www.kavsports.com",
+        "Size": "Custom Fit",
+        "Price": "320",
+        "Thickness": "30",
+        "Image": "KAV-Portola-Kaze3.jpg",
+        "Bottom": "img-kav-bot.jpg",
+        "Image Width": "800",
+        "Image Height": "800",
+        "Description": "A perfect 3D-printed custom fit. Beyond the norm. 50% more impact resistant. Made For You."
     }
 ]

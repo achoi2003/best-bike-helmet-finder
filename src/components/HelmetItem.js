@@ -20,14 +20,16 @@ function HelmetItem({ helmet, index, showVisualization, onSwipe }) {
       {...swipeHandlers}
       className="swipeable-container p-6 border border-gray-200 rounded-lg hover-bounce cursor-pointer"
     >
-      <h3 className="font-bold text-2xl pb-6">{title}</h3>
+      <h3 className="font-bold text-2xl pb-4">{title}</h3>
 
       {showVisualization ? (
         <div className="w-full h-48 mb-2 flex justify-center items-center">
+          <div div className="relative w-2/5">
           <HelmetVisualization helmet={helmet} />
+          </div>
           <div>
             <p className="text-l pl-4">Size: {helmet["Size"]}</p>
-            <p className="text-l mt-6 pl-4">
+            <p className="text-l mt-4 pl-4">
               Width Gap: {helmet.userWidGap.toFixed(2)} mm
             </p>
             <p className="text-l pl-4">

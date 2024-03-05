@@ -6,7 +6,7 @@ const HelmetVisualization = ({ helmet }) => {
   const ellipseHeight = (helmet.lengthCalc / Number(helmet["Length Exterior"])) * 100; 
 
   return (
-    <div className="relative w-1/2">
+    <>
       <img
         src={require(`../assets/helmet-bottoms/${helmet.Bottom}`)}
         alt={`${helmet["Helmet Name"]} Bottom`}
@@ -23,9 +23,10 @@ const HelmetVisualization = ({ helmet }) => {
           ry={`${ellipseHeight / 2}%`}
           fill="rgba(135, 206, 235, 0.5)" 
           fillOpacity="0.7"
+          stroke="rgba(135, 206, 235, 0.5)" 
         />
       </svg>
-    </div>
+    </>
   );
 }
 
