@@ -180,7 +180,7 @@ export default function HelmetFinder() {
         {/* Title */}
         <div className="w-full absolute top-0 left-0 pt-4 sm:pt-6 pl-4 pr-4 sm:pl-16">
           <div className="bg-black h-1 sm:h-2 w-full lg:w-4/5 xl:w-3/5"></div>
-          <h1 className="text-3xl sm:text-6xl font-bold mt-2 ml-2">
+          <h1 className="font-custom text-3xl sm:text-6xl font-bold mt-2 ml-2">
             The Bike Helmet Finder
           </h1>
         </div>
@@ -297,48 +297,6 @@ export default function HelmetFinder() {
                 </span>
               </button>
             </div>
-            {/* * Very Round
-            <div className="mt-2 flex justify-around">
-              <HeadShapeImage
-                src={veryRoundImg}
-                alt={"Very Round"}
-                handleHeadShapeChange={handleHeadShapeChange}
-                value={1.2}
-                goToStep={goToStep}
-              />
-              * Round
-              <HeadShapeImage
-                src={roundImg}
-                alt={"Round"}
-                handleHeadShapeChange={handleHeadShapeChange}
-                value={1.225}
-                goToStep={goToStep}
-              />
-              * Intermediate
-              <HeadShapeImage
-                src={intermediateImg}
-                alt={"Intermediate"}
-                handleHeadShapeChange={handleHeadShapeChange}
-                value={1.25}
-                goToStep={goToStep}
-              />
-              * Oval
-              <HeadShapeImage
-                src={ovalImg}
-                alt={"Oval"}
-                handleHeadShapeChange={handleHeadShapeChange}
-                value={1.275}
-                goToStep={goToStep}
-              />
-              * Aero
-              <HeadShapeImage
-                src={aeroImg}
-                alt={"Aero"}
-                handleHeadShapeChange={handleHeadShapeChange}
-                value={1.3}
-                goToStep={goToStep}
-              />
-            </div> */}
           </div>
         </>
       )}
