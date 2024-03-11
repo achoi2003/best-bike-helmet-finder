@@ -8,7 +8,7 @@ import intermediateImg from "./assets/head-shape/BaselineHead.png";
 import ovalImg from "./assets/head-shape/Baseline-1dev.png";
 import aeroImg from "./assets/head-shape/Baseline-2dev.png";
 import veryAeroImg from "./assets/head-shape/Baseline-3dev..png";
-import measureImg from "./assets/SideHeadShot(1).png";
+import measureImg from "./assets/SideHeadShot(2).png";
 
 import Navigation from "./components/Navigation";
 import HelmetVisualization from "./components/HelmetVisualization";
@@ -180,7 +180,7 @@ export default function HelmetFinder() {
         {/* Title */}
         <div className="w-full absolute top-0 left-0 pt-4 sm:pt-6 pl-4 pr-4 sm:pl-16">
           <div className="bg-black h-1 sm:h-2 w-full lg:w-4/5 xl:w-3/5"></div>
-          <h1 className="font-custom text-3xl sm:text-6xl font-bold mt-2 ml-2">
+          <h1 className="font-custom text-3xl md:text-5xl lg:text-6xl font-bold mt-2 ml-2">
             The Bike Helmet Finder
           </h1>
         </div>
