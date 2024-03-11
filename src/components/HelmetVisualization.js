@@ -7,9 +7,6 @@ const HelmetVisualization = ({ helmet }) => {
     (helmet.widthCalc / Number(helmet["Width Exterior"])) * 100;
   const ellipseHeight =
     (helmet.lengthCalc / Number(helmet["Length Exterior"])) * 100;
-
-  const centerX = 50; // Since viewBox width is 100, center is at 50
-  const centerY = 50 * aspectRatio; // Adjusted for aspect ratio
   
   return (
     <>
