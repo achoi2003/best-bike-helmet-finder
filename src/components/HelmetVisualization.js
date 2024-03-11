@@ -10,12 +10,7 @@ const HelmetVisualization = ({ helmet }) => {
 
   const centerX = 50; // Since viewBox width is 100, center is at 50
   const centerY = 50 * aspectRatio; // Adjusted for aspect ratio
-
-  const lineXStart = centerX - ellipseWidth / 2;
-  const lineXEnd = centerX + ellipseWidth / 2;
-  const lineYStart = centerY - ellipseHeight / 2;
-  const lineYEnd = centerY + ellipseHeight / 2;
-
+  
   return (
     <>
       <img
@@ -53,42 +48,6 @@ const HelmetVisualization = ({ helmet }) => {
         >
           YOUR HEAD HERE
         </text>
-        {/* Horizontal Line */}
-        {/* <line
-          x1={`${lineXStart}%`}
-          y1={centerY}
-          x2={`${lineXEnd}%`}
-          y2={centerY}
-          stroke="yellow"
-          strokeDasharray="4"
-          markerStart="url(#arrow)"
-          markerEnd="url(#arrow)"
-        /> */}
-        {/* Vertical Line */}
-        {/* <line
-          x1={centerX}
-          y1={`${lineYStart}%`}
-          x2={centerX}
-          y2={`${lineYEnd}%`}
-          stroke="yellow"
-          strokeDasharray="4"
-          markerStart="url(#arrow)"
-          markerEnd="url(#arrow)"
-        /> */}
-        {/* Arrow markers */}
-        {/* <defs>
-          <marker
-            id="arrow"
-            markerWidth="10"
-            markerHeight="10"
-            refX="0"
-            refY="3"
-            orient="auto"
-            markerUnits="strokeWidth"
-          >
-            <path d="M0,0 L0,6 L9,3 z" fill="yellow" />
-          </marker>
-        </defs> */}
       </svg>
     </>
   );
