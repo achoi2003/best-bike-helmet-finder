@@ -1,7 +1,7 @@
 import { useSwipeable } from "react-swipeable";
 import HelmetVisualization from "./HelmetVisualization";
 
-function HelmetItem({ helmet, index, showVisualization, onSwipe }) {
+function HelmetItem({ helmet, index, showVisualization, onSwipe, goToStep }) {
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => onSwipe(index),
   });
@@ -14,13 +14,17 @@ function HelmetItem({ helmet, index, showVisualization, onSwipe }) {
   const titles = ["Adequate fit", "Better fit", "Our pick"];
   const title = titles[index] || "Option";
 
+  const handleClick = () => {
+    goToStep(4 + index);
+  };
+
   return (
     <div
       key={index}
       {...swipeHandlers}
+      onClick={handleClick}
       className="swipeable-container p-6 border border-gray-200 rounded-lg hover-bounce cursor-pointer"
     >
-      <a href={helmet["Purchase URL"]} target="_blank" rel="noopener noreferrer">
         <h3 className="font-bold text-2xl pb-4">{title}</h3>
 
         {showVisualization ? (
@@ -57,7 +61,6 @@ function HelmetItem({ helmet, index, showVisualization, onSwipe }) {
           {helmet["Helmet Name"]} ${helmet["Price"]}
         </h4>
         <p className="text-md text-gray-600">{helmet["Description"]}</p>
-      </a>
     </div>
   );
 }

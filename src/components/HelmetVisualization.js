@@ -37,13 +37,13 @@ const HelmetVisualization = ({ helmet }) => {
         <text
           x="50%"
           y="50%" // Adjust based on aspect ratio
-          fill="rgba(0, 0, 0, 1)"
+          fill="yellow"
           fontSize="8" // Adjust the font size as needed
           textAnchor="middle" // Centers the text horizontally
           alignmentBaseline="middle" // Centers the text vertically
           style={{ fontWeight: 'bold', userSelect: 'none' }} // Prevent text selection and bold the font
         >
-          YOUR HEAD HERE
+          YOUR HEAD
         </text>
       </svg>
     </>

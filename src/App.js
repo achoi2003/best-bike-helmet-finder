@@ -11,7 +11,7 @@ import veryAeroImg from "./assets/head-shape/Baseline-3dev..png";
 import measureImg from "./assets/SideHeadShot(2).png";
 
 import Navigation from "./components/Navigation";
-import HelmetVisualization from "./components/HelmetVisualization";
+import HelmetChoice from "./components/HelmetChoice"; 
 import HelmetItem from "./components/HelmetItem";
 
 export default function HelmetFinder() {
@@ -238,7 +238,7 @@ export default function HelmetFinder() {
           >
             <button
               onClick={() => goToStep(2)}
-              className="mt-6 px-16 py-3 bg-gray-600 text-white rounded-3xl hover:bg-gray-700 focus:outline-none flex items-center"
+              className="mt-6 px-16 py-3 bg-gray-600 text-white rounded-2xl hover:bg-gray-700 focus:outline-none flex items-center"
             >
               <span className="ml-2"> Continue </span>
               <span className="material-icons-outlined cursor-pointer">
@@ -289,7 +289,7 @@ export default function HelmetFinder() {
             <div>
               <button
                 onClick={() => goToStep(3)}
-                className="mt-6 px-16 py-3 bg-gray-600 text-white rounded-3xl hover:bg-gray-700 focus:outline-none flex items-center"
+                className="mt-6 px-16 py-3 bg-gray-600 text-white rounded-2xl hover:bg-gray-700 focus:outline-none flex items-center"
               >
                 <span className="ml-2"> Continue </span>
                 <span className="material-icons-outlined cursor-pointer">
@@ -322,136 +322,22 @@ export default function HelmetFinder() {
                     index={index}
                     showVisualization={showVisualization[index]}
                     onSwipe={showHelmetVisualization}
+                    goToStep={goToStep}
                   />
                 );
               })}
             </div>
           </div>
-          {window.innerWidth >= 768 && (
+          {window.innerWidth > 768 && (
             <>
-              {/** Choice 1 */}
-              <div className="flex items-center px-8" id="step-4">
-                <div className="flex flex-row w-full">
-                  {/* Left Side - Helmet Bottom Image */}
-                  <div className="relative w-1/3">
-                    {bestHelmets[0] && (
-                      <HelmetVisualization helmet={bestHelmets[0]} />
-                    )}
-                  </div>
-                  {/* Right Side - Helmet Details */}
-                  <div className="w-1/2 pl-12">
-                    {bestHelmets[0] && (
-                      <div>
-                        <p className="text-3xl font-semibold text-gray-500">
-                          {bestHelmets[0]["Helmet Brand"]}
-                        </p>
-                        <div className="flex justify-between items-center">
-                          <h4 className="font-semibold text-5xl">
-                            {bestHelmets[0]["Helmet Name"]}
-                          </h4>
-                          <span className="text-3xl font-semibold">
-                            ${bestHelmets[0]["Price"]}
-                          </span>
-                        </div>
-                        <p className="text-xl mt-6">
-                          Size: {bestHelmets[0]["Size"]}
-                        </p>
-                        <p className="text-xl mt-6">
-                          Width Gap: {bestHelmets[0].userWidGap.toFixed(2)} mm
-                        </p>
-                        <p className="text-xl">
-                          Length Gap: {bestHelmets[0].userLenGap.toFixed(2)} mm
-                        </p>
-                        <p className="text-xl">
-                          VTech Rating: {bestHelmets[0]["VTech Rating"]}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-              {/** Choice 2 */}
-              <div className="flex items-center px-8 pt-2" id="step-5">
-                <div className="flex flex-row w-full">
-                  {/* Left Side - Helmet Bottom Image */}
-                  <div className="relative w-1/3">
-                    {bestHelmets[1] && (
-                      <HelmetVisualization helmet={bestHelmets[1]} />
-                    )}
-                  </div>
-                  {/* Right Side - Helmet Details */}
-                  <div className="w-1/2 pl-12">
-                    {bestHelmets[1] && (
-                      <div>
-                        <p className="text-3xl font-semibold text-gray-500">
-                          {bestHelmets[1]["Helmet Brand"]}
-                        </p>
-                        <div className="flex justify-between items-center">
-                          <h4 className="font-semibold text-5xl">
-                            {bestHelmets[1]["Helmet Name"]}
-                          </h4>
-                          <span className="text-3xl font-semibold">
-                            ${bestHelmets[1]["Price"]}
-                          </span>
-                        </div>
-                        <p className="text-xl mt-6">
-                          Size: {bestHelmets[1]["Size"]}
-                        </p>
-                        <p className="text-xl mt-6">
-                          Width Gap: {bestHelmets[1].userWidGap.toFixed(2)} mm
-                        </p>
-                        <p className="text-xl">
-                          Length Gap: {bestHelmets[1].userLenGap.toFixed(2)} mm
-                        </p>
-                        <p className="text-xl">
-                          VTech Rating: {bestHelmets[1]["VTech Rating"]}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-              {/** Choice 3 */}
-              <div className="flex items-center px-8 pt-2" id="step-6">
-                <div className="flex flex-row w-full">
-                  {/* Left Side - Helmet Bottom Image */}
-                  <div className="relative w-1/3">
-                    {bestHelmets[2] && (
-                      <HelmetVisualization helmet={bestHelmets[2]} />
-                    )}
-                  </div>
-                  {/* Right Side - Helmet Details */}
-                  <div className="w-1/2 pl-12">
-                    {bestHelmets[2] && (
-                      <div>
-                        <p className="text-3xl font-semibold text-gray-500">
-                          {bestHelmets[2]["Helmet Brand"]}
-                        </p>
-                        <div className="flex justify-between items-center">
-                          <h4 className="font-semibold text-5xl">
-                            {bestHelmets[2]["Helmet Name"]}
-                          </h4>
-                          <span className="text-3xl font-semibold">
-                            ${bestHelmets[2]["Price"]}
-                          </span>
-                        </div>
-                        <p className="text-xl mt-6">
-                          Size: {bestHelmets[2]["Size"]}
-                        </p>
-                        <p className="text-xl mt-6">
-                          Width Gap: {bestHelmets[2].userWidGap.toFixed(2)} mm
-                        </p>
-                        <p className="text-xl">
-                          Length Gap: {bestHelmets[2].userLenGap.toFixed(2)} mm
-                        </p>
-                        <p className="text-xl">
-                          VTech Rating: {bestHelmets[2]["VTech Rating"]}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
+              {bestHelmets.map((helmet, index) => (
+                <HelmetChoice
+                  key={index}
+                  helmet={helmet}
+                  onPurchase={(url) => window.open(url, "_blank")}
+                  index={index}
+                />
+              ))}
             </>
           )}
         </>
